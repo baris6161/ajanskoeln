@@ -1,6 +1,10 @@
 {
   "name": "ajanskoeln-monorepo",
   "private": true,
+  "optionalDependencies": {
+    "lightningcss-linux-x64-gnu": "1.32.0",
+    "lightningcss-darwin-arm64": "1.32.0"
+  },
   "workspaces": [
     "apps/*"
   ],
