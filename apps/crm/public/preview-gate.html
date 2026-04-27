@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Ajans Köln — Çok yakında</title>
+    <link rel="preload" href="/logo-ajans-koeln.png" as="image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #faf7f4;
+        --primary: #3d1f0e;
+        --accent: #c4956a;
+        --muted: #5c4f47;
+        --card: #ffffff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        font-family: "DM Sans", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--muted);
+      }
+      .bg-glow {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.4;
+        background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(196, 149, 106, 0.35), transparent),
+          radial-gradient(ellipse 60% 40% at 100% 100%, rgba(61, 31, 14, 0.08), transparent);
+      }
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 1rem 1.25rem;
+        gap: 0.75rem;
+      }
+      @media (min-width: 768px) {
+        .topbar {
+          padding: 1.5rem 2rem;
+        }
+      }
+      .lang {
+        display: flex;
+        gap: 0.25rem;
+        padding: 0.25rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(61, 31, 14, 0.12);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(8px);
+      }
+      .lang button {
+        border: none;
+        cursor: pointer;
+        border-radius: 9999px;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        background: transparent;
+        color: rgba(61, 31, 14, 0.65);
+      }
+      .lang button.active {
+        background: var(--accent);
+        color: #1a0a00;
+      }
+      .admin-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(61, 31, 14, 0.12);
+        background: rgba(255, 255, 255, 0.92);
+        padding: 0.45rem 0.85rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--primary);
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+      }
+      @media (min-width: 768px) {
+        .admin-btn {
+          font-size: 0.875rem;
+          padding: 0.5rem 1rem;
+        }
+      }
+      main {
+        position: relative;
+        z-index: 1;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 5.5rem 1.5rem 3rem;
+        max-width: 40rem;
+        margin: 0 auto;
+      }
+      .logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1rem;
+        background: var(--card);
+        padding: 1rem 1.2rem;
+        box-shadow: 0 12px 44px -14px rgba(61, 31, 14, 0.28);
+        border: 1px solid rgba(61, 31, 14, 0.07);
+      }
+      @media (min-width: 768px) {
+        .logo-wrap {
+          padding: 1.15rem 1.4rem;
+          border-radius: 1.1rem;
+        }
+      }
+      .logo-img {
+        display: block;
+        height: 6.75rem;
+        width: auto;
+        max-width: min(88vw, 300px);
+        object-fit: contain;
+      }
+      @media (min-width: 768px) {
+        .logo-img {
+          height: 8.25rem;
+          max-width: min(85vw, 340px);
+        }
+      }
+      @media (min-width: 1024px) {
+        .logo-img {
+          height: 9.25rem;
+        }
+      }
+      .tag {
+        margin-top: 1.75rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      h1 {
+        margin: 1.25rem 0 0;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(2rem, 6vw, 3.25rem);
+        font-weight: 600;
+        line-height: 1.08;
+        color: var(--primary);
+        text-wrap: balance;
+      }
+      .block {
+        display: none;
+      }
+      .block.visible {
+        display: block;
+      }
+      .lead {
+        margin-top: 1.75rem;
+        font-size: 1rem;
+        line-height: 1.65;
+        max-width: 28rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      @media (min-width: 768px) {
+        .lead {
+          font-size: 1.05rem;
+        }
+      }
+      .ig-wrap {
+        margin-top: 2.5rem;
+      }
+      .ig-lead {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        max-width: 26rem;
+        margin: 0 auto 1rem;
+      }
+      .ig-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.75rem;
+        border-radius: 9999px;
+        background: var(--accent);
+        color: #1a0a00;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        box-shadow: 0 10px 40px -12px rgba(61, 31, 14, 0.22);
+        transition: transform 0.2s, opacity 0.2s;
+      }
+      .ig-btn:hover {
+        opacity: 0.92;
+        transform: translateY(-1px);
+      }
+      .region {
+        margin-top: 2.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: rgba(61, 31, 14, 0.55);
+      }
+      .divider {
+        margin-top: 2.5rem;
+        width: 6rem;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(196, 149, 106, 0.65), transparent);
+      }
+      .mail {
+        margin-top: 2rem;
+        font-size: 0.875rem;
+      }
+      .mail a {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .mail a:hover {
+        text-decoration: underline;
+      }
+      .foot {
+        margin-top: 2.5rem;
+        font-size: 0.7rem;
+        opacity: 0.55;
+      }
+      .foot a {
+        color: var(--muted);
+      }
+      /* Modal */
+      .backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.55);
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      .backdrop.open {
+        display: flex;
+      }
+      .modal {
+        width: 100%;
+        max-width: 22rem;
+        background: var(--card);
+        border-radius: 0.75rem;
+        border: 1px solid rgba(61, 31, 14, 0.1);
+        padding: 1.5rem;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      }
+      .modal h2 {
+        margin: 0;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 1.25rem;
+        color: var(--primary);
+      }
+      .modal p {
+        margin: 0.5rem 0 1rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      label {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+      }
+      input {
+        width: 100%;
+        padding: 0.65rem 0.75rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(61, 31, 14, 0.15);
+        margin-bottom: 0.85rem;
+        font: inherit;
+      }
+      .submit {
+        width: 100%;
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 9999px;
+        background: var(--accent);
+        color: #1a0a00;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .submit:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      .err {
+        color: #b42318;
+        font-size: 0.8rem;
+        margin-top: 0.35rem;
+        min-height: 1.2em;
+      }
+      .close-x {
+        float: right;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="topbar">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="tr" class="active">TR</button>
+        <button type="button" data-set-lang="de">DE</button>
+        <button type="button" data-set-lang="en">EN</button>
+      </div>
+      <button type="button" class="admin-btn" id="open-admin" aria-haspopup="dialog">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        <span data-i18n="admin">Admin</span>
+      </button>
+    </div>
+
+    <main>
+      <div class="logo-wrap">
+        <img
+          class="logo-img"
+          src="/logo-ajans-koeln.png"
+          alt="Ajans Köln Fair Organisation"
+          width="327"
+          height="312"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </div>
+
+      <div class="block visible" data-lang="tr">
+        <p class="tag">Hostes &amp; Catering</p>
+        <h1>Çok yakında yanınızdayız!</h1>
+        <p class="lead">
+          Sizin için yepyeni bir web sitemiz üzerinde çalışıyoruz — çok yakında yayında olacak. Bu süreçte sabrınız için içten teşekkürler: fuarlarda ve etkinliklerde görüşmek dileğiyle.
+        </p>
+        <div class="ig-wrap">
+          <p class="ig-lead">
+            Bu arada bizi Instagram'dan takip edebilir, neler yaptığımıza göz atabilirsiniz — çok seviniriz.
+          </p>
+          <a class="ig-btn" href="https://www.instagram.com/ajanskoeln/" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              />
+            </svg>
+            Instagram'da bizi takip et
+          </a>
+        </div>
+        <p class="region">Almanya genelinde</p>
+        <div class="divider"></div>
+        <p class="mail">
+          Sorularınız mı var? Bize yazın:
+          <a href="mailto:ajanskoeln@gmail.com">ajanskoeln@gmail.com</a>
+        </p>
+      </div>
+
+      <div class="block" data-lang="de">
+        <p class="tag">Hostess &amp; Catering</p>
+        <h1>Wir sind bald für euch da!</h1>
+        <p class="lead">
+          Wir arbeiten an einer neuen Website für euch — bald geht sie online. Danke für eure Geduld bis dahin; wir freuen uns auf die Messe und euer nächstes Event.
+        </p>
+        <div class="ig-wrap">
+          <p class="ig-lead">
+            In der Zwischenzeit könnt ihr uns gern auf Instagram beobachten und schauen, was wir so tun — das freut uns riesig.
+          </p>
+          <a class="ig-btn" href="https://www.instagram.com/ajanskoeln/" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              />
+            </svg>
+            Auf Instagram folgen
+          </a>
+        </div>
+        <p class="region">Deutschlandweit</p>
+        <div class="divider"></div>
+        <p class="mail">
+          Fragen? Schreibt uns gern:
+          <a href="mailto:ajanskoeln@gmail.com">ajanskoeln@gmail.com</a>
+        </p>
+      </div>
+
+      <div class="block" data-lang="en">
+        <p class="tag">Hostess &amp; Catering</p>
+        <h1>We'll be with you very soon!</h1>
+        <p class="lead">
+          We're building a brand-new website for you — it'll be online very soon. Thank you for your patience; we look forward to seeing you at fairs and your next event.
+        </p>
+        <div class="ig-wrap">
+          <p class="ig-lead">
+            In the meantime, feel free to follow us on Instagram and see what we're up to — we'd love that.
+          </p>
+          <a class="ig-btn" href="https://www.instagram.com/ajanskoeln/" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              />
+            </svg>
+            Follow on Instagram
+          </a>
+        </div>
+        <p class="region">Across Germany</p>
+        <div class="divider"></div>
+        <p class="mail">
+          Questions? Drop us a line:
+          <a href="mailto:ajanskoeln@gmail.com">ajanskoeln@gmail.com</a>
+        </p>
+      </div>
+
+      <p class="foot">
+        <a href="/api/preview-logout" data-i18n="logout">Vorschau beenden</a>
+        ·
+        <span data-i18n="stand">Stand 2026</span>
+      </p>
+    </main>
+
+    <div class="backdrop" id="backdrop" role="presentation">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
+        <button type="button" class="close-x" id="close-admin" aria-label="Close">×</button>
+        <h2 id="dlg-title" data-i18n="dlgTitle">Interner Zugang</h2>
+        <p data-i18n="dlgDesc">Nur für das Team — nach dem Login lädt sich die Website.</p>
+        <form id="login-form">
+          <label for="u" data-i18n="lblUser">Name</label>
+          <input id="u" name="username" autocomplete="username" required />
+          <label for="p" data-i18n="lblPass">Passwort</label>
+          <input id="p" name="password" type="password" autocomplete="current-password" required />
+          <p class="err" id="err" role="alert"></p>
+          <button type="submit" class="submit" id="submit" data-i18n="submit">Anmelden</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var dlg = {
+          tr: { admin: "Admin", dlgTitle: "Dahili erişim", dlgDesc: "Yalnızca ekip — girişten sonra site yüklenir.", lblUser: "Kullanıcı adı", lblPass: "Şifre", submit: "Giriş yap", logout: "Önizlemeyi bitir", stand: "2026" },
+          de: { admin: "Admin", dlgTitle: "Interner Zugang", dlgDesc: "Nur für das Team — nach dem Login lädt sich die Website.", lblUser: "Name", lblPass: "Passwort", submit: "Anmelden", logout: "Vorschau beenden", stand: "2026" },
+          en: { admin: "Admin", dlgTitle: "Internal access", dlgDesc: "Team only — after signing in the site will load.", lblUser: "Username", lblPass: "Password", submit: "Sign in", logout: "End preview", stand: "2026" },
+        };
+        var errMsg = { tr: "Bilgiler doğru değil.", de: "Zugangsdaten stimmen nicht.", en: "Those details don't match." };
+        var netMsg = { tr: "Sunucu yanıt vermedi.", de: "Serverfehler.", en: "Server error." };
+
+        function setLang(l) {
+          document.documentElement.lang = l === "tr" ? "tr" : l === "de" ? "de" : "en";
+          document.querySelectorAll("[data-lang]").forEach(function (el) {
+            el.classList.toggle("visible", el.getAttribute("data-lang") === l);
+          });
+          document.querySelectorAll(".lang button").forEach(function (b) {
+            b.classList.toggle("active", b.getAttribute("data-set-lang") === l);
+          });
+          var d = dlg[l] || dlg.de;
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            var k = el.getAttribute("data-i18n");
+            if (d[k]) el.textContent = d[k];
+          });
+          window.__csLang = l;
+        }
+
+        document.querySelectorAll("[data-set-lang]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            setLang(btn.getAttribute("data-set-lang"));
+          });
+        });
+
+        var bd = document.getElementById("backdrop");
+        document.getElementById("open-admin").addEventListener("click", function () {
+          bd.classList.add("open");
+          document.getElementById("err").textContent = "";
+        });
+        document.getElementById("close-admin").addEventListener("click", function () {
+          bd.classList.remove("open");
+        });
+        bd.addEventListener("click", function (e) {
+          if (e.target === bd) bd.classList.remove("open");
+        });
+
+        document.getElementById("login-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var err = document.getElementById("err");
+          var sub = document.getElementById("submit");
+          err.textContent = "";
+          sub.disabled = true;
+          try {
+            var res = await fetch("/api/preview-session", {
+              method: "POST",
+              headers: { "content-type": "application/json", accept: "application/json" },
+              body: JSON.stringify({
+                username: document.getElementById("u").value,
+                password: document.getElementById("p").value,
+              }),
+            });
+            if (res.ok) {
+              window.location.href = "/";
+              return;
+            }
+            var l = window.__csLang || "tr";
+            err.textContent = errMsg[l] || errMsg.de;
+          } catch (x) {
+            var l2 = window.__csLang || "tr";
+            err.textContent = netMsg[l2] || netMsg.de;
+          } finally {
+            sub.disabled = false;
+          }
+        });
+
+        setLang("tr");
+      })();
+    </script>
+  </body>
+</html>

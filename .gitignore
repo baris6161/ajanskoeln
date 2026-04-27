@@ -15,10 +15,12 @@
 
 # next.js
 /.next/
+**/.next/
 /out/
 
 # production
 /build
+apps/marketing/dist/
 
 # misc
 .DS_Store
@@ -39,3 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Vite-Marketing-Build → apps/crm/public (wird bei Root-`npm run build` erzeugt)
+apps/crm/public/index.html
+apps/crm/public/assets/
