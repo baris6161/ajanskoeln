@@ -11,7 +11,7 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build -w @ajans/marketing && node scripts/copy-marketing-public.mjs && npm run build -w @ajans/crm && node scripts/sync-next-dotnext-to-root.mjs",
+    "build": "npm run build -w @ajans/marketing && node scripts/copy-marketing-public.mjs && npm run build -w @ajans/crm",
     "build:marketing": "npm run build -w @ajans/marketing",
     "build:crm": "npm run build -w @ajans/crm",
     "dev": "npm run dev -w @ajans/crm",
