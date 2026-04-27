@@ -27,4 +27,6 @@ Umgebungsvariablen im Vercel-Projekt u. a.:
 - optional **`PREVIEW_ACCESS_USER`** / **`PREVIEW_ACCESS_PASSWORD`** (Standard aus Code nur für Entwicklung)
 - wie bisher **`NEXT_PUBLIC_SUPABASE_*`**, Gmail/SMTP, **`SETTINGS_ENCRYPTION_KEY`**, …
 
+**„Routes Manifest Could Not Be Found“:** Im Dashboard unter *Build & Development Settings* das Feld **Output Directory** leer lassen (nicht `apps/crm/.next` setzen). Entweder **Root Directory = `apps/crm`** (empfohlen) mit den `cd ../.. && …`-Befehlen oben — oder Projekt am **Repo-Root** mit Standard-`npm run build`: Dann kopiert der Build auf Vercel (`VERCEL=1`) automatisch `apps/crm/.next` nach `./.next`.
+
 Repository: [github.com/baris6161/ajanskoeln](https://github.com/baris6161/ajanskoeln).
