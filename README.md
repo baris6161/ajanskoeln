@@ -1,3 +1,21 @@
+# Ajans Köln CRM
+
+Interne CRM-Web-App fur Kunden, Angebote, PDF und Gmail-Versand.
+
+## Setup
+
+1. `cp .env.example .env.local`
+2. Supabase und Gmail Werte in `.env.local` eintragen
+3. `npm install`
+4. `npm run dev`
+
+## Kern-Features
+
+- Supabase Auth + RLS Schema
+- Dashboard, Kunden, Angebote, Einstellungen
+- Angebots-Wizard mit Summenberechnung
+- PDF-Grundgerust mit `@react-pdf/renderer`
+- API Route fur Gmail Versand mit Nodemailer
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
