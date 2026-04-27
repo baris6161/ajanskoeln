@@ -6,7 +6,9 @@ import { getServerLocale } from "@/lib/locale";
 
 export default async function SettingsPage() {
   const locale = await getServerLocale();
-  const settings = await listSettings();
+  const settings = (await listSettings()).filter(
+    (item) => item.key !== "smtp_email" && item.key !== "smtp_password_encrypted",
+  );
   const txt =
     locale === "de"
       ? { title: "Einstellungen", company: "Firmendaten" }

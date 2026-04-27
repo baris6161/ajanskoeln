@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { listSettings, resetSmtpSettings, saveSmtpSettings, upsertSettings } from "@/lib/queries/settings";
+import { settingsItemsPayloadSchema, smtpPayloadSchema } from "@/lib/security/validation";
 
 export async function GET() {
   try {
@@ -21,15 +22,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true });
     }
     if (body.smtpEmail !== undefined && body.smtpPassword !== undefined) {
-      await saveSmtpSettings(body.smtpEmail, body.smtpPassword);
+      const parsed = smtpPayloadSchema.safeParse(body);
+      if (!parsed.success) {
+        return NextResponse.json({ error: "Invalid SMTP payload" }, { status: 400 });
+      }
+      await saveSmtpSettings(parsed.data.smtpEmail, parsed.data.smtpPassword);
       return NextResponse.json({ ok: true });
     }
 
-    await upsertSettings(body.items ?? []);
+    const parsed = settingsItemsPayloadSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid settings payload" }, { status: 400 });
+    }
+    await upsertSettings(parsed.data.items);
     return NextResponse.json({ ok: true });
   } catch (error) {
+    console.error("Settings API error", error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unknown error" },
+      { error: "Settings operation failed" },
       { status: 500 },
     );
   }

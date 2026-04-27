@@ -1,54 +1,74 @@
 # Ajans Köln CRM
 
-Interne CRM-Web-App fur Kunden, Angebote, PDF und Gmail-Versand.
+Ajans Köln CRM ist eine interne, mehrsprachige Vertriebs- und Angebotsplattform für eine Event-, Hostess- und Catering-Agentur.  
+Die Anwendung deckt den kompletten Ablauf von der Kundenerfassung bis zum Versand professioneller Angebote als PDF per E-Mail ab.
 
-## Setup
+## Produktüberblick
 
-1. `cp .env.example .env.local`
-2. Supabase und Gmail Werte in `.env.local` eintragen
-3. `npm install`
-4. `npm run dev`
+Die Plattform ist auf einen schnellen, strukturierten Sales- und Angebotsprozess ausgerichtet:
 
-## Kern-Features
+- Zentrale Kundenverwaltung mit Firmenprofilen, Ansprechpartnern und Sprachpräferenzen
+- Angebotsverwaltung mit Statusfluss, Summenberechnung und Nachverfolgung
+- Sprachspezifischer Versand von Angeboten (TR/DE/EN) inklusive PDF-Anhang
+- Persistente, revisionssichere Angebotssprache für erneute PDF-Ansicht
+- NFC-Landingpage für Neukundenkontakt mit VCF-Download
+- Rollen- und Session-basierte Zugriffskontrolle für interne Nutzung
 
-- Supabase Auth + RLS Schema
-- Dashboard, Kunden, Angebote, Einstellungen
-- Angebots-Wizard mit Summenberechnung
-- PDF-Grundgerust mit `@react-pdf/renderer`
-- API Route fur Gmail Versand mit Nodemailer
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Funktionsumfang
 
-## Getting Started
+### 1) Dashboard und Steuerung
 
-First, run the development server:
+- KPI-Übersicht zu Kunden und Angeboten
+- Direkte Navigation in operative Bereiche
+- Verlinkte Schnellzugriffe auf aktuelle Angebote
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 2) Kundenmanagement
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Erfassen, Bearbeiten und Löschen von Kunden
+- Sprachpräferenz je Kunde (TR/DE/EN)
+- Schutzlogik für abhängige Angebotsdaten bei Kundendeletion
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3) Angebotsmanagement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Erstellung über strukturierten Angebots-Wizard
+- Leistungszeilen mit Mengen-, Tages- und Preislogik
+- Statusverwaltung (Entwurf, Gesendet, Angenommen, Abgelehnt)
+- Bearbeitungssperre bei finalen Status mit klarer UX-Rückmeldung
 
-## Learn More
+### 4) PDF-Engine und Versand
 
-To learn more about Next.js, take a look at the following resources:
+- Professionelles Angebots-PDF mit CI-Farbschema und Logo
+- Sprachabhängige PDF-Inhalte (TR/DE/EN)
+- Versand über Gmail SMTP mit konfigurierbarer Absenderidentität
+- PDF-Ansicht und Download auf Angebotsdetailseite
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 5) Einstellungen
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- SMTP-Konfiguration (Gmail-Adresse + App-Passwort)
+- SMTP-Testfunktion
+- Sichere Zurücksetzen-Funktion für SMTP-Daten
+- Erweiterbare Firmeneinstellungen im Key-Value-Modell
 
-## Deploy on Vercel
+## Sicherheitsposition (Stand aktuell)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Die Anwendung enthält sicherheitsrelevante Basiskontrollen auf Applikations- und Datenebene:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Supabase Auth + Row Level Security (RLS) für zentrale Tabellen
+- Serverseitige Verschlüsselung sensibler SMTP-Werte
+- Validierung kritischer API-Payloads (Kunden, Angebote, SMTP, Mailversand)
+- Reduzierte Fehlerexposition in API-Antworten
+- Sicherheitsheader im Request-Flow (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `COOP`)
+- Öffentliche Endpunkte bewusst auf NFC-Use-Case begrenzt
+
+## Technologieprofil
+
+- Next.js (App Router)
+- TypeScript
+- Supabase (Auth, DB, RLS)
+- Tailwind CSS + Component Library
+- `@react-pdf/renderer` für Angebotsdokumente
+- Nodemailer für SMTP-Mailversand
+
+## Zielbild
+
+Ajans Köln CRM ist als interne Business-Anwendung konzipiert, die eine konsistente Angebotsqualität, nachvollziehbare Kommunikation und hohe operative Effizienz im Tagesgeschäft sicherstellt.

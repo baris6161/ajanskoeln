@@ -6,20 +6,29 @@ import { loadSmtpSettings } from "@/lib/queries/settings";
 import { getOfferById, updateOfferStatus } from "@/lib/queries/offers";
 import { getCustomerById } from "@/lib/queries/customers";
 import { OfferDocument } from "@/lib/pdf/offer-document";
+import { sendOfferPayloadSchema } from "@/lib/security/validation";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    const parsed = sendOfferPayloadSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ ok: false, error: "Invalid mail payload" }, { status: 400 });
+    }
+    const data = parsed.data;
     const mailLanguage: "tr" | "en" | "de" =
-      body.mailLanguage === "en" || body.mailLanguage === "de" ? body.mailLanguage : "tr";
+      data.mailLanguage === "en" || data.mailLanguage === "de" ? data.mailLanguage : "tr";
     const smtp = await loadSmtpSettings();
+    if (!smtp.email || !smtp.password) {
+      return NextResponse.json({ ok: false, error: "SMTP is not configured" }, { status: 400 });
+    }
     const transporter = createMailTransporter({
-      user: smtp.email || process.env.GMAIL_USER,
-      pass: smtp.password || process.env.GMAIL_APP_PASSWORD,
+      user: smtp.email,
+      pass: smtp.password,
     });
     let attachments: Array<{ filename: string; content: Buffer; contentType: string }> = [];
-    if (body.offerId) {
-      const offer = await getOfferById(body.offerId);
+    if (data.offerId) {
+      const offer = await getOfferById(data.offerId);
       if (offer) {
         const customer = offer.customer_id ? await getCustomerById(offer.customer_id) : null;
         const pdfElement = React.createElement(OfferDocument, {
@@ -41,28 +50,28 @@ export async function POST(request: Request) {
     }
 
     await transporter.sendMail({
-      from: smtp.email || process.env.GMAIL_USER,
-      to: body.to,
-      subject: body.subject,
-      text: `${String(body.message ?? "").replace(/\s+$/, "")}\n\n\n`,
+      from: smtp.email,
+      to: data.to,
+      subject: data.subject,
+      text: `${data.message.replace(/\s+$/, "")}\n\n\n`,
       attachments,
     });
 
     let warning: string | null = null;
-    if (body.offerId) {
+    if (data.offerId) {
       try {
-        await updateOfferStatus(body.offerId, "gesendet", mailLanguage);
+        await updateOfferStatus(data.offerId, "gesendet", mailLanguage);
       } catch (error) {
+        console.error("Offer status update failed after successful send", error);
         warning =
-          error instanceof Error
-            ? `Mail sent, but offer status update failed: ${error.message}`
-            : "Mail sent, but offer status update failed.";
+          "Mail sent, but offer status update failed.";
       }
     }
     return NextResponse.json({ ok: true, warning });
   } catch (error) {
+    console.error("Send offer API failed", error);
     return NextResponse.json(
-      { ok: false, error: error instanceof Error ? error.message : "Unknown error" },
+      { ok: false, error: "Mailversand fehlgeschlagen" },
       { status: 500 },
     );
   }

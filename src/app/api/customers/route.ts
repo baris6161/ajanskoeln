@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createCustomer, listCustomers } from "@/lib/queries/customers";
+import { customerPayloadSchema } from "@/lib/security/validation";
 
 export async function GET(request: Request) {
   try {
@@ -18,11 +19,16 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const customer = await createCustomer(body);
+    const parsed = customerPayloadSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid customer payload" }, { status: 400 });
+    }
+    const customer = await createCustomer(parsed.data);
     return NextResponse.json(customer);
   } catch (error) {
+    console.error("Create customer failed", error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unknown error" },
+      { error: "Customer creation failed" },
       { status: 500 },
     );
   }
