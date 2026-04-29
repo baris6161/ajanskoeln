@@ -1,14 +1,34 @@
+import { useEffect } from "react";
 import LegalLayout from "@/layouts/LegalLayout";
+import { getSiteOrigin } from "@/config/site";
+import { applyDocumentSeo } from "@/lib/documentSeo";
+import { TR_SEO, buildMainJsonLd, buildBreadcrumbJsonLd, mergeSchemaGraph } from "@/seo/turkishSeo";
 
 export default function Impressum() {
+  useEffect(() => {
+    const origin = getSiteOrigin();
+    applyDocumentSeo(origin, {
+      title: TR_SEO.impressum.title,
+      description: TR_SEO.impressum.description,
+      path: "/impressum",
+      jsonLd: mergeSchemaGraph(
+        buildMainJsonLd(origin),
+        buildBreadcrumbJsonLd(origin, [
+          { name: "Ana sayfa", path: "/" },
+          { name: "Künye", path: "/impressum" },
+        ]),
+      ),
+    });
+  }, []);
+
   return (
-    <LegalLayout title="Impressum">
+    <LegalLayout title="Künye ve yasal bilgiler">
       <p>
-        Angaben gemäß § 5 TMG und Art. 13 EU-Verordnung 2021/784 (Medienstaatsvertrag) soweit
-        einschlägig:
+        Aşağıdaki bilgiler, Almanya’da genel bilgilendirme pratiği ve ilgili düzenlemelere uygun olarak
+        sunulmuştur. Sorularınız için yukarıdaki iletişim kanallarını kullanabilirsiniz.
       </p>
 
-      <h2>Anbieter</h2>
+      <h2>Hizmet sağlayıcı</h2>
       <p>
         Ajans Köln
         <br />
@@ -16,58 +36,52 @@ export default function Impressum() {
         <br />
         30926 Seelze
         <br />
-        Deutschland
+        Almanya (Deutschland)
       </p>
 
-      <h2>Kontakt</h2>
+      <h2>İletişim</h2>
       <p>
         Telefon:{" "}
         <a href="tel:+491727532501" className="text-accent underline">
           +49 172 7532501
         </a>
         <br />
-        E-Mail:{" "}
+        E-posta:{" "}
         <a href="mailto:ajanskoeln@gmail.com" className="text-accent underline">
           ajanskoeln@gmail.com
         </a>
       </p>
 
-      <h2>Verantwortlich für den Inhalt</h2>
+      <h2>İçerikten sorumlu kişi</h2>
       <p>
-        Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV ist der Anbieter unter der oben
-        genannten Anschrift.
+        Bu web sitesindeki metinlerden, yasal çerçevede mümkün olduğu ölçüde, yukarıda adresi
+        bulunan hizmet sağlayıcı sorumludur.
       </p>
 
-      <h2>Haftung für Inhalte</h2>
+      <h2>İçeriklerin doğruluğu</h2>
       <p>
-        Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten
-        nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
-        Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
-        Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige
-        Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von
-        Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
+        İçerikleri güncel ve doğru tutmak için çaba gösteriyoruz. Yine de yazım hataları veya
+        güncellenmemiş bilgiler oluşabilir. Yasal olarak bağlayıcı bilgi için lütfen doğrudan
+        bizimle iletişime geçin.
       </p>
 
-      <h2>Haftung für Links</h2>
+      <h2>Dış bağlantılar</h2>
       <p>
-        Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen
-        Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
-        Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
-        Seiten verantwortlich.
+        Sitemizde üçüncü taraf sitelere bağlantılar bulunabilir. Bu sitelerin içeriğini kontrol
+        etmiyoruz ve içeriklerinden yalnızca ilgili site operatörleri sorumludur.
       </p>
 
-      <h2>EU-Streitschlichtung</h2>
+      <h2>Online uyuşmazlık çözümü (AB)</h2>
       <p>
-        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{" "}
+        Avrupa Komisyonu çevrimiçi uyuşmazlık çözümü için bir platform sunmaktadır:{" "}
         <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">
           https://ec.europa.eu/consumers/odr/
         </a>
-        . Unsere E-Mail-Adresse finden Sie oben im Impressum. Wir sind nicht verpflichtet und nicht
-        bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen,
-        sofern nicht gesetzlich anders vorgeschrieben.
+        . E-posta adresimiz yukarıda yer almaktadır. Tüketici hakem heyeti önünde bir sürece
+        katılma yükümlülüğümüz yalnızca yasal olarak zorunlu olduğu ölçüdedir.
       </p>
 
-      <p className="text-xs opacity-80">Stand: April 2026</p>
+      <p className="text-xs opacity-80">Son güncelleme: Nisan 2026</p>
     </LegalLayout>
   );
 }

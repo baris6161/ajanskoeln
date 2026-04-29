@@ -72,7 +72,7 @@ export default function Contact() {
               <a href="https://wa.me/491727532501" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-medium text-white shadow-[var(--shadow-soft)] hover:opacity-90 transition min-h-[44px]">
                 <MessageCircle className="h-4 w-4" /> {tr(t.contact.whatsapp, lang)}
               </a>
-              <a href="https://www.instagram.com/ajanskoeln/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-border bg-card h-11 w-11 text-primary hover:bg-accent hover:text-accent-foreground hover:border-accent transition" aria-label="Instagram — Ajans Köln">
+              <a href="https://www.instagram.com/ajanskoeln/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-border bg-card h-11 w-11 text-primary hover:bg-accent hover:text-accent-foreground hover:border-accent transition" aria-label={tr(t.contact.instagramAria, lang)}>
                 <Instagram className="h-5 w-5" />
               </a>
             </div>

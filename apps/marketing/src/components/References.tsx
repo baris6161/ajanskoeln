@@ -1,8 +1,5 @@
-import { Quote } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { t, tr } from "@/i18n/translations";
-
-const logos = ["Anadolu", "Mercator", "Bosphorus", "Messe Expo", "Rheinhaus", "Levante", "NordTech", "Marmara"];
 
 export default function References() {
   const { lang } = useLang();
@@ -14,41 +11,16 @@ export default function References() {
           <h2 className="reveal mt-4 font-display font-semibold text-primary text-balance leading-[1.1]" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", transitionDelay: "100ms" }}>
             {tr(t.refs.title, lang)}
           </h2>
+          <p className="reveal mt-6 text-foreground/80 leading-relaxed text-[15px] text-pretty" style={{ transitionDelay: "160ms" }}>
+            {tr(t.refs.intro, lang)}
+          </p>
         </div>
 
-        {/* Marquee */}
-        <div className="reveal mt-14 overflow-hidden relative" style={{ maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)" }}>
-          <div className="flex w-max animate-marquee">
-            {[...logos, ...logos].map((name, i) => (
-              <div
-                key={i}
-                className="flex h-16 w-44 items-center justify-center mx-4 rounded-lg border border-border bg-card grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-              >
-                <span className="font-display text-lg font-semibold text-primary tracking-wide">{name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Testimonials */}
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {t.refs.testimonials.map((q, i) => (
-            <figure
-              key={i}
-              className="reveal relative rounded-2xl bg-card p-8 border border-border shadow-[var(--shadow-soft)] transition-all duration-300 hover:shadow-[var(--shadow-elegant)] hover:-translate-y-1"
-              style={{ transitionDelay: `${i * 120}ms` }}
-            >
-              <Quote className="absolute -top-4 left-6 h-10 w-10 text-accent fill-accent" />
-              <blockquote className="text-foreground/80 leading-relaxed text-[15px] mt-2">
-                {tr(q.quote, lang)}
-              </blockquote>
-              <figcaption className="mt-6 pt-6 border-t border-border">
-                <p className="font-display font-semibold text-primary">{q.name}</p>
-                <p className="text-sm text-muted-foreground">{q.company}</p>
-              </figcaption>
-            </figure>
+        <ul className="reveal mx-auto mt-12 max-w-2xl list-disc space-y-3 pl-5 text-left text-foreground/85 text-[15px] leading-relaxed" style={{ transitionDelay: "220ms" }}>
+          {t.refs.bullets.map((b) => (
+            <li key={tr(b, lang)}>{tr(b, lang)}</li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

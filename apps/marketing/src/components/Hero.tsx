@@ -35,7 +35,7 @@ export default function Hero() {
           <img
             key={src}
             src={src}
-            alt=""
+            alt={tr(t.hero.slideAlts[i]!, lang)}
             width={1920}
             height={1280}
             loading={i === 0 ? "eager" : "lazy"}
@@ -90,7 +90,7 @@ export default function Hero() {
             key={i}
             onClick={() => setActive(i)}
             className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-10 bg-accent" : "w-5 bg-background/40 hover:bg-background/70"}`}
-            aria-label={`Slide ${i + 1}`}
+            aria-label={`${tr(t.hero.slideDotAria, lang)} ${i + 1}`}
           />
         ))}
       </div>

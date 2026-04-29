@@ -14,6 +14,9 @@ export const t = {
     gallery:  { tr: "Galeri",      de: "Galerie",       en: "Gallery" },
     contact:  { tr: "İletişim",    de: "Kontakt",       en: "Contact" },
     menu:     { tr: "Menü",        de: "Menü",          en: "Menu" },
+    homeAria: { tr: "Ajans Köln ana sayfa", de: "Ajans Köln Startseite", en: "Ajans Köln home" },
+    closeMenu: { tr: "Menüyü kapat", de: "Menü schließen", en: "Close menu" },
+    langAria: { tr: "Dil seç", de: "Sprache wählen", en: "Choose language" },
   },
   hero: {
     eyebrow: { tr: "Almanya genelinde", de: "Deutschlandweit", en: "Across Germany" },
@@ -23,12 +26,39 @@ export const t = {
       en: "Professional Hostess & Catering Services",
     },
     sub: {
-      tr: "Fuarlar, kurumsal etkinlikler ve özel organizasyonlar için güvenilir çözüm ortağınız.",
-      de: "Ihr zuverlässiger Partner für Messen, Firmenevents und besondere Veranstaltungen.",
-      en: "Your reliable partner for trade fairs, corporate events and special occasions.",
+      tr: "Fuarlar, kurumsal etkinlikler ve özel davetler için hostes, ikram ve stand desteği. Seelze merkezli iletişim: +49 172 7532501.",
+      de: "Hostess-, Bewirtungs- und Stand-Support für Messen, Firmenevents und private Anlässe. Kontaktstandort Seelze: +49 172 7532501.",
+      en: "Hostess, catering and stand support for trade fairs, corporate events and private occasions. Based in Seelze: +49 172 7532501.",
     },
     cta1: { tr: "Hizmetlerimizi Keşfedin", de: "Unsere Leistungen entdecken", en: "Discover Our Services" },
     cta2: { tr: "İletişime Geçin",          de: "Kontakt aufnehmen",           en: "Get in Touch" },
+    slideAlts: [
+      {
+        tr: "Fuar veya etkinlik ortamında servis tepsisi taşıyan hostes görseli",
+        de: "Hostess mit Serviertablett auf Messe oder Event",
+        en: "Hostess carrying a serving tray at a fair or event",
+      },
+      {
+        tr: "Davet veya fuar alanında ikram hazırlığı görseli",
+        de: "Bewirtung und Vorbereitung im Veranstaltungsbereich",
+        en: "Refreshment preparation at an event venue",
+      },
+      {
+        tr: "Misafir karşılama ve sunum için etkinlik alanı görseli",
+        de: "Gästeempfang und Präsentation im Veranstaltungsraum",
+        en: "Guest reception and presentation at an event space",
+      },
+      {
+        tr: "Kurumsal etkinlikte servis ve düzen görseli",
+        de: "Service und Organisation bei einem Firmenevent",
+        en: "Service and setup at a corporate event",
+      },
+    ],
+    slideDotAria: {
+      tr: "Slayt",
+      de: "Folie",
+      en: "Slide",
+    },
   },
   about: {
     label: { tr: "Hakkımızda", de: "Über uns", en: "About us" },
@@ -39,20 +69,39 @@ export const t = {
       en: "Ajans Köln provides professional hostess and catering services at trade fairs, corporate events and special occasions across Germany.",
     },
     p2: {
-      tr: "Ekibimiz; Türkçe, Almanca ve İngilizce dillerinde hizmet verebilen, deneyimli ve dinamik profesyonellerden oluşmaktadır. Müşterilerimizin her isteğini titizlikle karşılıyor, etkinliklerini unutulmaz kılmak için var gücümüzle çalışıyoruz.",
-      de: "Unser Team besteht aus erfahrenen Fachkräften, die auf Türkisch, Deutsch und Englisch kommunizieren können. Wir erfüllen jeden Kundenwunsch mit größter Sorgfalt und sorgen dafür, dass jede Veranstaltung unvergesslich wird.",
-      en: "Our team consists of experienced professionals who communicate in Turkish, German and English. We fulfill every client's wishes with the utmost care and work hard to make every event unforgettable.",
+      tr: "Ekibimiz Türkçe, Almanca ve İngilizce iletişim kurabilen profesyonellerden oluşur. Etkinlik öncesi kısa bir brifing ile rol, kıyafet ve zaman çizelgesini netleştirmeyi tercih ederiz.",
+      de: "Unser Team kommuniziert auf Türkisch, Deutsch und Englisch. Vor dem Einsatz klären wir Rolle, Dresscode und Ablauf gern kurz im Briefing.",
+      en: "Our team communicates in Turkish, German and English. Before an assignment we prefer a short briefing on role, dress code and schedule.",
     },
     p3: {
-      tr: "Hannover Messe başta olmak üzere Almanya'nın önde gelen fuar ve etkinlik mekanlarında güvenle tercih edilen bir marka olmaktan gurur duyuyoruz.",
-      de: "Wir sind stolz darauf, ein vertrauensvoller Partner auf der Hannover Messe und anderen führenden Veranstaltungsorten in Deutschland zu sein.",
-      en: "We are proud to be a trusted partner at Hannover Messe and other leading event venues in Germany.",
+      tr: "Hannover Messe dahil Almanya'daki büyük fuar alanlarında ve kurumsal etkinlik mekânlarında görev alıyoruz.",
+      de: "Wir arbeiten auf großen Messegeländen in Deutschland, einschließlich Hannover Messe, sowie bei Firmenveranstaltungen.",
+      en: "We work at large fairgrounds in Germany including Hannover Messe, and at corporate event venues.",
     },
-    stats: {
-      events:    { tr: "Etkinlik",            de: "Veranstaltungen",     en: "Events" },
-      languages: { tr: "Dil",                 de: "Sprachen",            en: "Languages" },
-      satisfaction: { tr: "Müşteri Memnuniyeti", de: "Kundenzufriedenheit", en: "Client Satisfaction" },
+    badge: { tr: "Almanya genelinde", de: "Deutschlandweit", en: "Across Germany" },
+    portraitAlt: {
+      tr: "Ajans Köln ekibinden bir temsilci portresi",
+      de: "Porträt einer Vertretung des Ajans Köln Teams",
+      en: "Portrait of an Ajans Köln team representative",
     },
+    highlights: [
+      {
+        value: { tr: "3", de: "3", en: "3" },
+        label: { tr: "Türkçe, Almanca, İngilizce", de: "Türkisch, Deutsch, Englisch", en: "Turkish, German, English" },
+      },
+      {
+        value: { tr: "DE", de: "DE", en: "DE" },
+        label: { tr: "Görev alanı: Almanya", de: "Einsatzgebiet: Deutschland", en: "Service area: Germany" },
+      },
+      {
+        value: { tr: "·", de: "·", en: "·" },
+        label: {
+          tr: "Hostes ve ikram koordinasyonu",
+          de: "Hostess- und Catering-Koordination",
+          en: "Hostess and catering coordination",
+        },
+      },
+    ],
   },
   services: {
     label: { tr: "Hizmetlerimiz", de: "Unsere Leistungen", en: "Our Services" },
@@ -73,9 +122,9 @@ export const t = {
       {
         title: { tr: "Catering & İkram", de: "Catering & Bewirtung", en: "Catering & Refreshments" },
         desc: {
-          tr: "Sıcak ve soğuk içecekler, atıştırmalıklar ve özel ikram çözümleri. Her bütçeye uygun.",
-          de: "Warme und kalte Getränke, Snacks und individuelle Bewirtungslösungen. Für jedes Budget.",
-          en: "Hot and cold drinks, snacks and tailored catering solutions. For every budget.",
+          tr: "Sıcak ve soğuk içecekler, atıştırmalıklar ve menü planı etkinlik süresine ve mekân kurallarına göre birlikte netleştirilir.",
+          de: "Warme und kalte Getränke, Snacks und Menüplanung stimmen wir mit Ihnen nach Laufzeit und Location-Vorgaben ab.",
+          en: "Hot and cold drinks, snacks and menu timing are agreed with you for the venue rules and event length.",
         },
       },
       {
@@ -91,40 +140,72 @@ export const t = {
   refs: {
     label: { tr: "Referanslar", de: "Referenzen", en: "References" },
     title: {
-      tr: "Birlikte çalıştığımız markalar",
-      de: "Marken, mit denen wir arbeiten",
-      en: "Brands we work with",
+      tr: "Nerede ve nasıl çalışıyoruz",
+      de: "Wo und wie wir arbeiten",
+      en: "Where and how we work",
     },
-    testimonials: [
+    intro: {
+      tr: "Müşteri isimlerini veya şirket logolarını web sitesinde paylaşmıyoruz. Talep ettiğinizde süreç, kapsam ve uygunluk için doğrudan konuşabiliriz.",
+      de: "Wir veröffentlichen keine Kundennamen oder Firmenlogos auf der Website. Auf Anfrage sprechen wir gern direkt über Ablauf, Umfang und Verfügbarkeit.",
+      en: "We do not publish client names or company logos on the website. On request we can discuss process, scope and availability directly.",
+    },
+    bullets: [
       {
-        quote: {
-          tr: "Ajans Köln ekibi ITB Berlin fuarımızda son derece profesyonel ve güler yüzlü bir hizmet sundu. Kesinlikle tavsiye ediyoruz.",
-          de: "Das Team von Ajans Köln hat auf unserer ITB Berlin hervorragende Arbeit geleistet. Sehr empfehlenswert.",
-          en: "The Ajans Köln team delivered an extremely professional and warm service at our ITB Berlin fair. Highly recommended.",
-        },
-        name: "M. Yılmaz", company: "Anadolu Travel GmbH",
+        tr: "Ulusal ve uluslararası fuar ortamlarında hostes ve misafir karşılama",
+        de: "Hostess und Gästeempfang auf nationalen und internationalen Messen",
+        en: "Hostess and guest reception at national and international trade fairs",
       },
       {
-        quote: {
-          tr: "Standımızda görev alan hostes ekibi her dilde misafirlerimizi büyük bir özenle karşıladı. Tekrar çalışacağız.",
-          de: "Das Hostess-Team an unserem Stand hat unsere Gäste in jeder Sprache mit größter Sorgfalt empfangen. Wir arbeiten gerne wieder zusammen.",
-          en: "The hostess team at our stand welcomed every guest in every language with great care. We'll work together again.",
-        },
-        name: "S. Klein", company: "Mercator Industries AG",
+        tr: "Hannover Messe gibi büyük fuar alanlarında saha deneyimi",
+        de: "Erfahrung auf großen Messegeländen wie der Hannover Messe",
+        en: "On-site experience at large fairgrounds such as Hannover Messe",
       },
       {
-        quote: {
-          tr: "Catering kalitesi ve zamanlama mükemmeldi. Misafirlerimizden çok güzel geri dönüşler aldık.",
-          de: "Die Catering-Qualität und das Timing waren perfekt. Wir haben sehr positives Feedback unserer Gäste erhalten.",
-          en: "The catering quality and timing were perfect. We received excellent feedback from our guests.",
-        },
-        name: "E. Demir", company: "Bosphorus Events",
+        tr: "Kurumsal davet ve özel günlerde ikram ve servis koordinasyonu",
+        de: "Bewirtung und Service-Koordination bei Firmenfeiern und privaten Anlässen",
+        en: "Catering and service coordination for corporate and private occasions",
       },
     ],
   },
   gallery: {
     label: { tr: "Galeri", de: "Galerie", en: "Gallery" },
     title: { tr: "Etkinliklerden Kareler", de: "Impressionen", en: "Moments from our events" },
+    openImageAria: { tr: "Görseli büyüt", de: "Bild vergrößern", en: "Open image larger" },
+    closeLightboxAria: { tr: "Görseli kapat", de: "Bild schließen", en: "Close image" },
+    prevAria: { tr: "Önceki görsel", de: "Vorheriges Bild", en: "Previous image" },
+    nextAria: { tr: "Sonraki görsel", de: "Nächstes Bild", en: "Next image" },
+    imageAlts: [
+      {
+        tr: "Davet masasında çiçek ve mum ile süslenmiş düzen",
+        de: "Gedeckter Tisch mit Blumen und Kerzen",
+        en: "Table setting with flowers and candles",
+      },
+      {
+        tr: "Şampanya kadehi ve kutlama ortamı",
+        de: "Sektglas und festliche Atmosphäre",
+        en: "Champagne glass in a festive setting",
+      },
+      {
+        tr: "Etkinlik alanında peçete ve çatal düzeni",
+        de: "Servietten- und Besteckdekor am Veranstaltungsort",
+        en: "Napkin and cutlery styling at an event",
+      },
+      {
+        tr: "İkram tepsisi ve sunum detayı",
+        de: "Serviertablett und Präsentationsdetail",
+        en: "Serving tray and presentation detail",
+      },
+      {
+        tr: "Kurumsal davet için uzun masa düzeni",
+        de: "Langer Tisch für einen Firmenanlass",
+        en: "Long table setup for a corporate dinner",
+      },
+      {
+        tr: "Kadehler ve davet masası genel görünüm",
+        de: "Gläser und Überblick über den Festtisch",
+        en: "Glassware and overview of the banquet table",
+      },
+    ],
   },
   contact: {
     label: { tr: "İletişim", de: "Kontakt", en: "Contact" },
@@ -134,11 +215,12 @@ export const t = {
       en: "Let's talk about your next event",
     },
     sub: {
-      tr: "24 saat içinde geri dönüş yapıyoruz.",
-      de: "Wir melden uns innerhalb von 24 Stunden zurück.",
-      en: "We respond within 24 hours.",
+      tr: "Mesajınızı aldığımızda mümkün olan en kısa sürede size döneriz. Acil durumlarda telefon veya WhatsApp daha hızlı olabilir.",
+      de: "Wir melden uns so schnell wie möglich. In dringenden Fällen sind Telefon oder WhatsApp oft am schnellsten.",
+      en: "We reply as soon as we can. For urgent matters, phone or WhatsApp is often fastest.",
     },
     whatsapp: { tr: "WhatsApp'tan Yaz", de: "WhatsApp schreiben", en: "Message on WhatsApp" },
+    instagramAria: { tr: "Ajans Köln Instagram", de: "Ajans Köln auf Instagram", en: "Ajans Köln on Instagram" },
     form: {
       name:    { tr: "Ad Soyad",  de: "Name",      en: "Name" },
       email:   { tr: "E-posta",   de: "E-Mail",    en: "Email" },
@@ -152,9 +234,9 @@ export const t = {
         en: "Your message has been received. We'll be in touch shortly.",
       },
       error: {
-        tr: "Gönderilemedi — lütfen tekrar deneyin veya WhatsApp kullanın.",
-        de: "Senden fehlgeschlagen — bitte erneut versuchen oder WhatsApp nutzen.",
-        en: "Could not send — please try again or use WhatsApp.",
+        tr: "Gönderilemedi, lütfen tekrar deneyin veya WhatsApp kullanın.",
+        de: "Senden fehlgeschlagen, bitte erneut versuchen oder WhatsApp nutzen.",
+        en: "Could not send, please try again or use WhatsApp.",
       },
     },
   },

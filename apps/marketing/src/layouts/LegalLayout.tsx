@@ -6,9 +6,8 @@ type Props = { title: string; children: ReactNode };
 
 export default function LegalLayout({ title, children }: Props) {
   useEffect(() => {
-    document.title = `${title} — Ajans Köln`;
     window.scrollTo(0, 0);
-  }, [title]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

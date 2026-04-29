@@ -47,11 +47,11 @@ export default function Gallery() {
               onClick={() => setIdx(i)}
               className="reveal group relative mb-5 block w-full overflow-hidden rounded-2xl bg-primary"
               style={{ transitionDelay: `${i * 80}ms` }}
-              aria-label={`Open image ${i + 1}`}
+              aria-label={`${tr(t.gallery.openImageAria, lang)} ${i + 1}`}
             >
               <img
                 src={src}
-                alt=""
+                alt={tr(t.gallery.imageAlts[i]!, lang)}
                 loading="lazy"
                 className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-80"
               />
@@ -64,21 +64,21 @@ export default function Gallery() {
       {/* Lightbox */}
       {idx !== null && (
         <div className="fixed inset-0 z-[60] bg-dark-section/95 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <button onClick={() => setIdx(null)} className="absolute top-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-background/10 text-background hover:bg-background/20" aria-label="Close">
+          <button onClick={() => setIdx(null)} className="absolute top-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-background/10 text-background hover:bg-background/20" aria-label={tr(t.gallery.closeLightboxAria, lang)}>
             <X className="h-6 w-6" />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); setIdx((i) => ((i ?? 0) - 1 + images.length) % images.length); }}
             className="absolute left-4 md:left-8 flex h-12 w-12 items-center justify-center rounded-full bg-background/10 text-background hover:bg-background/20"
-            aria-label="Previous"
+            aria-label={tr(t.gallery.prevAria, lang)}
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
-          <img src={images[idx]} alt="" className="max-h-[88vh] max-w-[88vw] object-contain rounded-lg shadow-2xl" />
+          <img src={images[idx]} alt={tr(t.gallery.imageAlts[idx]!, lang)} className="max-h-[88vh] max-w-[88vw] object-contain rounded-lg shadow-2xl" />
           <button
             onClick={(e) => { e.stopPropagation(); setIdx((i) => ((i ?? 0) + 1) % images.length); }}
             className="absolute right-4 md:right-8 flex h-12 w-12 items-center justify-center rounded-full bg-background/10 text-background hover:bg-background/20"
-            aria-label="Next"
+            aria-label={tr(t.gallery.nextAria, lang)}
           >
             <ChevronRight className="h-6 w-6" />
           </button>

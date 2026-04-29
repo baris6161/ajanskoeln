@@ -58,7 +58,7 @@ export default function Navigation() {
             href="#home"
             onClick={(e) => { e.preventDefault(); handleNav("#home"); }}
             className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-xl"
-            aria-label="Ajans Köln — Startseite"
+            aria-label={tr(t.nav.homeAria, lang)}
           >
             <BrandLogo variant={logoVariant} />
           </a>
@@ -67,7 +67,7 @@ export default function Navigation() {
             to="/"
             onClick={() => setOpen(false)}
             className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-xl"
-            aria-label="Ajans Köln — Startseite"
+            aria-label={tr(t.nav.homeAria, lang)}
           >
             <BrandLogo variant="nav" />
           </Link>
@@ -101,7 +101,7 @@ export default function Navigation() {
                     ? "bg-accent text-accent-foreground"
                     : lookScrolled ? "text-primary/70 hover:text-primary" : "text-background/80 hover:text-background"
                 }`}
-                aria-label={`Switch language to ${l.label}`}
+                aria-label={`${tr(t.nav.langAria, lang)} ${l.label}`}
               >
                 {l.label}
               </button>
@@ -132,7 +132,7 @@ export default function Navigation() {
         >
           <div className="flex h-16 items-center justify-between px-6 border-b border-border bg-background">
             <BrandLogo variant="drawer" />
-            <button type="button" onClick={() => setOpen(false)} className="flex h-11 w-11 items-center justify-center text-primary" aria-label="Close menu">
+            <button type="button" onClick={() => setOpen(false)} className="flex h-11 w-11 items-center justify-center text-primary" aria-label={tr(t.nav.closeMenu, lang)}>
               <X className="h-6 w-6" />
             </button>
           </div>

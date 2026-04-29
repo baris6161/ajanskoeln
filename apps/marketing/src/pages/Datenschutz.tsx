@@ -1,120 +1,120 @@
+import { useEffect } from "react";
 import LegalLayout from "@/layouts/LegalLayout";
+import { getSiteOrigin } from "@/config/site";
+import { applyDocumentSeo } from "@/lib/documentSeo";
+import { TR_SEO, buildMainJsonLd, buildBreadcrumbJsonLd, mergeSchemaGraph } from "@/seo/turkishSeo";
 
 export default function Datenschutz() {
+  useEffect(() => {
+    const origin = getSiteOrigin();
+    applyDocumentSeo(origin, {
+      title: TR_SEO.datenschutz.title,
+      description: TR_SEO.datenschutz.description,
+      path: "/datenschutz",
+      jsonLd: mergeSchemaGraph(
+        buildMainJsonLd(origin),
+        buildBreadcrumbJsonLd(origin, [
+          { name: "Ana sayfa", path: "/" },
+          { name: "Gizlilik", path: "/datenschutz" },
+        ]),
+      ),
+    });
+  }, []);
+
   return (
-    <LegalLayout title="Datenschutzerklärung">
+    <LegalLayout title="Gizlilik bildirimi">
       <p>
-        Mit der folgenden Information erfüllen wir unsere Informationspflichten nach Art. 13
-        DSGVO für die Nutzung dieser Website (ohne separates Nutzerkonto).
+        Bu metin, bu web sitesini hesap veya üyelik olmadan kullandığınızda GDPR (Genel Veri
+        Koruma Tüzüğü) kapsamındaki bilgilendirme yükümlülüğümüzü karşılamak içindir.
       </p>
 
-      <h2>1. Verantwortlicher</h2>
+      <h2>1. Veri sorumlusu</h2>
       <p>
-        Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:
+        GDPR anlamında veri sorumlusu:
         <br />
-        Ajans Köln, Dieselweg 1, 30926 Seelze, Deutschland
+        Ajans Köln, Dieselweg 1, 30926 Seelze, Almanya
         <br />
-        E-Mail:{" "}
+        E-posta:{" "}
         <a href="mailto:ajanskoeln@gmail.com" className="text-accent underline">
           ajanskoeln@gmail.com
         </a>
-        , Telefon:{" "}
+        , telefon:{" "}
         <a href="tel:+491727532501" className="text-accent underline">
           +49 172 7532501
         </a>
       </p>
 
-      <h2>2. Hosting und technische Bereitstellung</h2>
+      <h2>2. Barındırma ve teknik sunum</h2>
       <p>
-        Diese Website wird über einen Hosting-Anbieter (z.&nbsp;B. Vercel Inc. oder vergleichbar)
-        ausgeliefert. Beim Aufruf der Seiten werden durch den Hosting-Anbieter in der Regel
-        automatisch Informationen in sogenannten Server-Logfiles gespeichert, z.&nbsp;B. IP-Adresse,
-        Datum und Uhrzeit des Abrufs, übertragene Datenmenge, Browsertyp und ggf. Referrer-URL.
-        Die Verarbeitung erfolgt zur technischen Bereitstellung und Sicherheit des Angebots auf
-        Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und
-        stabilen Betrieb). Logdaten werden nach Wegfall des Zwecks bzw. nach Ablauf gesetzlicher
-        Aufbewahrungsfristen gelöscht, soweit der Anbieter nicht längere Speicherung gesetzlich
-        benötigt.
+        Site bir barındırma sağlayıcısı üzerinden yayınlanır (örneğin Vercel veya benzeri).
+        Sayfa çağrılarında sunucu tarafında genellikle günlük kayıtları oluşur: IP adresi, tarih
+        ve saat, aktarılan veri miktarı, tarayıcı türü ve mümkünse yönlendiren adres. İşleme
+        amacı, sitenin güvenli ve stabil çalışmasıdır. Hukuki dayanak, GDPR madde 6 fıra 1 bent f
+        (meşru menfaat). Saklama süreleri sağlayıcının teknik ve yasal düzenlemelerine tabidir.
       </p>
 
-      <h2>3. Kontaktformular</h2>
+      <h2>3. İletişim formu</h2>
       <p>
-        Wenn Sie das Kontaktformular nutzen, verarbeiten wir die von Ihnen eingegebenen Daten
-        (in der Regel: Name, E-Mail-Adresse, Betreff, Nachricht). Zweck ist ausschließlich die
-        Bearbeitung Ihrer Anfrage und die Kommunikation mit Ihnen.
+        Formu kullandığınızda gönderdiğiniz verileri (ad, e-posta, konu, mesaj) yalnızca talebinizi
+        yanıtlamak ve sizinle iletişim kurmak için işleriz.
       </p>
       <p>
-        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage mit der Anbahnung oder
-        Durchführung eines Vertrags zusammenhängt, andernfalls Art. 6 Abs. 1 lit. f DSGVO
-        (berechtigtes Interesse an der Beantwortung von Kontaktanfragen).
+        Hukuki dayanak, talebinizin sözleşmeye hazırlık veya sözleşmeyle bağlantılı olmasına
+        bağlı olarak GDPR madde 6 fıra 1 bent b veya bent f (iletişim taleplerini yanıtlama
+        menfaati) olabilir.
       </p>
       <p>
-        Sofern die Übermittlung über einen Drittanbieter (z.&nbsp;B. Formular-Dienst wie Formspree
-        oder eine eigene API) erfolgt, werden die Daten dort nur zur Zustellung der Nachricht an
-        uns verarbeitet. Bitte beachten Sie ggf. die Datenschutzerklärung des jeweiligen
-        Dienstes; die konkrete Anbindung ergibt sich aus der technischen Konfiguration der
-        Website.
+        Veri iletimi bir üçüncü taraf form servisi veya kendi API uç noktamız üzerinden yapılıyorsa,
+        veriler yalnızca mesajı bize iletmek için o sağlayıcıda işlenir. O sağlayıcının gizlilik
+        metnini de okumanız gerekir; teknik bağlantı projedeki gerçek uygulamaya göre belirlenir.
+      </p>
+      {/* TODO: VITE_CONTACT_ENDPOINT canlıda ise aşağıdaki paragrafı gerçek akışa göre güncelleyin. */}
+      <p>
+        Form uç noktası yapılandırılmamışsa mesaj tarayıcıdan çıkar ve sunucularımızda kalıcı
+        saklanmaz; uç nokta aktif olduğunda yukarıdaki amaç ve saklama ilkeleri geçerlidir.
       </p>
       <p>
-        Solange kein Formular-Endpunkt (z.&nbsp;B. API oder Drittanbieter) technisch angebunden
-        ist, wird Ihre Nachricht nicht dauerhaft auf unseren Servern gespeichert; mit aktivem
-        Endpunkt gelten die vorstehenden Zwecke und Speicherfristen entsprechend.
-      </p>
-      <p>
-        Wir löschen die Daten, sobald die Speicherung nicht mehr erforderlich ist, oder
-        schränken die Verarbeitung ein, falls gesetzliche Aufbewahrungspflichten bestehen.
+        Verileri artık gerekmediğinde siler veya yasal saklama yükümlülükleri varsa işlemeyi
+        kısıtlarız.
       </p>
 
-      <h2>4. Spracheinstellung (lokale Speicherung)</h2>
+      <h2>4. Dil tercihi (yerel depolama)</h2>
       <p>
-        Ihre gewählte Sprache (Türkisch, Deutsch oder Englisch) wird im Browser mittels
-        LocalStorage gespeichert (Schlüssel <code className="rounded bg-muted px-1 text-foreground">ajans-koeln-lang</code>),
-        damit die Auswahl bei einem erneuten Besuch erhalten bleibt. Es werden keine
-        personenbezogenen Profile erstellt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO
-        (komfortable Darstellung der Website). Sie können die Daten jederzeit löschen, indem Sie
-        die Website-Daten in Ihren Browsereinstellungen entfernen.
+        Seçtiğiniz dil (Türkçe, Almanca, İngilizce) tarayıcıda{" "}
+        <code className="rounded bg-muted px-1 text-foreground">ajans-koeln-lang</code> anahtarı
+        ile LocalStorage üzerinden saklanır; profil oluşturmaz. Dayanak: GDPR madde 6 fıra 1 bent f
+        (kullanılabilirlik). Tarayıcı ayarlarından site verilerini silerek kaldırabilirsiniz.
       </p>
 
-      <h2>5. Links zu Drittanbietern (WhatsApp, Instagram, Telefon, E-Mail)</h2>
+      <h2>5. Üçüncü taraf bağlantıları (WhatsApp, Instagram, telefon, e-posta)</h2>
       <p>
-        Auf dieser Website finden sich Verlinkungen zu Diensten Dritter (z.&nbsp;B. WhatsApp,
-        Instagram). Erst wenn Sie einen solchen Link anklicken, können Daten an den jeweiligen
-        Anbieter übermittelt werden. Für die Datenverarbeitung dort sind allein die Anbieter
-        verantwortlich. Bitte informieren Sie sich in deren Datenschutzhinweisen.
+        Sitede üçüncü taraf hizmetlere bağlantılar vardır. Bağlantıya tıkladığınızda veri aktarımı
+        o sağlayıcıya geçebilir. İşleme yalnızca ilgili sağlayıcının sorumluluğundadır.
       </p>
 
-      <h2>6. Cookies</h2>
+      <h2>6. Çerezler</h2>
       <p>
-        Diese Website setzt keine eigenen Tracking-Cookies für Werbezwecke ein. Technisch
-        notwendige Cookies können durch den Hosting- oder Formular-Dienst gesetzt werden,
-        soweit für den Betrieb erforderlich.
+        Kendi reklam amaçlı izleme çerezleri kullanmıyoruz. Barındırma veya form sağlayıcısı
+        teknik olarak gerekli çerezleri ayarlayabilir.
       </p>
 
-      <h2>7. Ihre Rechte</h2>
-      <p>Sie haben — soweit die gesetzlichen Voraussetzungen erfüllt sind — insbesondere:</p>
+      <h2>7. Haklarınız</h2>
+      <p>Yasal koşulların sağlandığı ölçüde özellikle şunlara sahipsiniz:</p>
       <ul>
-        <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
-        <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
-        <li>Recht auf Löschung (Art. 17 DSGVO)</li>
-        <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-        <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
-        <li>
-          Recht, erteilte Einwilligungen mit Wirkung für die Zukunft zu widerrufen (Art. 7 Abs. 3
-          DSGVO)
-        </li>
-        <li>
-          Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, Widerspruch gegen
-          eine Verarbeitung einzulegen, die auf Art. 6 Abs. 1 lit. f DSGVO beruht (Art. 21 DSGVO)
-        </li>
+        <li>Bilgi talebi (GDPR madde 15)</li>
+        <li>Düzeltme (madde 16)</li>
+        <li>Silme (madde 17)</li>
+        <li>İşlemenin kısıtlanması (madde 18)</li>
+        <li>Veri taşınabilirliği (madde 20)</li>
+        <li>Varsa rızanın geri alınması (madde 7 fıra 3)</li>
+        <li>Meşru menfaate dayalı işlemeye itiraz (madde 21, madde 6 fıra 1 bent f ile ilgili)</li>
       </ul>
       <p>
-        Außerdem steht Ihnen ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu (Art.
-        77 DSGVO). Zuständig ist die Behörde Ihres gewöhnlichen Aufenthaltsorts oder unseres
-        Standorts.
+        Ayrıca bir veri koruma denetim otoritesine şikayette bulunma hakkınız vardır (madde 77).
       </p>
 
-      <h2>8. Aktualität</h2>
-      <p className="text-xs opacity-80">Stand dieser Erklärung: April 2026</p>
+      <h2>8. Güncellik</h2>
+      <p className="text-xs opacity-80">Bu bildirimin durumu: Nisan 2026</p>
     </LegalLayout>
   );
 }

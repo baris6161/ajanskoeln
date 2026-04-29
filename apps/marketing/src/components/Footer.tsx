@@ -6,6 +6,7 @@ import { t, tr } from "@/i18n/translations";
 const links = [
   { to: "/#hakkimizda", key: "about" as const },
   { to: "/#hizmetler", key: "services" as const },
+  { to: "/#referanslar", key: "refs" as const },
   { to: "/#galeri", key: "gallery" as const },
   { to: "/#iletisim", key: "contact" as const },
 ];

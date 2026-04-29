@@ -13,6 +13,7 @@ const MARKETING_PUBLIC = new Set([
   "/preview-gate.html",
   "/logo-ajans-koeln.png",
   "/robots.txt",
+  "/sitemap.xml",
   "/favicon.ico",
   "/vite.svg",
   "/placeholder.svg",
@@ -31,6 +32,14 @@ function isRootPreviewApi(pathname: string): boolean {
   return pathname === "/api/preview-session" || pathname === "/api/preview-logout";
 }
 
+/** Link-Vorschau (WhatsApp, Meta, X, LinkedIn, Slack, …): ohne Cookie echtes index.html mit og:* Meta. */
+function isLinkPreviewBot(userAgent: string | null): boolean {
+  if (!userAgent) return false;
+  return /facebookexternalhit|Facebot|Instagram|WhatsApp|LinkedInBot|Twitterbot|Slackbot|TelegramBot|Pinterest|Discordbot|vkShare|redditbot/i.test(
+    userAgent,
+  );
+}
+
 function isCanonicalCrmPath(pathname: string): boolean {
   if (pathname.startsWith("/api/")) {
     return !isRootPreviewApi(pathname);
@@ -40,6 +49,14 @@ function isCanonicalCrmPath(pathname: string): boolean {
 
 async function handleMarketing(request: NextRequest): Promise<NextResponse> {
   const pathname = request.nextUrl.pathname;
+  const ua = request.headers.get("user-agent");
+
+  if (request.method === "GET" && isLinkPreviewBot(ua)) {
+    if (pathname.startsWith("/assets/") || MARKETING_PUBLIC.has(pathname) || hasFileExtension(pathname)) {
+      return NextResponse.next();
+    }
+    return NextResponse.rewrite(new URL("/index.html", request.url));
+  }
 
   const secret = (process.env.PREVIEW_SESSION_SECRET ?? "").trim();
   const cookie = readCookie(request.headers.get("cookie"), PREVIEW_COOKIE_NAME);

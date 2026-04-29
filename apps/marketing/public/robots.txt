@@ -1,14 +1,6 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Sitemap ve tam robots kuralları production build çıktısında (dist/robots.txt) yazılır.
+# Yerel önizleme için: VITE_PRODUCTION_SITE_URL tanımlayıp npm run build sonrası dist dosyasına bakın.
+Sitemap: https://ajanskoeln.de/sitemap.xml

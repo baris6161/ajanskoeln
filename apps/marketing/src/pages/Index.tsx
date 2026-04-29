@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useLang } from "@/i18n/LanguageContext";
-import { t, tr } from "@/i18n/translations";
 import { useReveal } from "@/hooks/useReveal";
+import { getSiteOrigin } from "@/config/site";
+import { applyDocumentSeo } from "@/lib/documentSeo";
+import { TR_SEO, buildMainJsonLd } from "@/seo/turkishSeo";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -13,7 +14,6 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
-  const { lang } = useLang();
   const location = useLocation();
   useReveal();
 
@@ -30,16 +30,16 @@ const Index = () => {
   }, [location.hash, location.pathname]);
 
   useEffect(() => {
-    document.title = `Ajans Köln — ${tr(t.hero.title, lang)}`;
-    const desc = tr(t.hero.sub, lang);
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute("content", desc);
-  }, [lang]);
+    const origin = getSiteOrigin();
+    applyDocumentSeo(origin, {
+      title: TR_SEO.home.title,
+      description: TR_SEO.home.description,
+      path: "/",
+      ogTitle: TR_SEO.home.ogTitle,
+      ogDescription: TR_SEO.home.ogDescription,
+      jsonLd: buildMainJsonLd(origin),
+    });
+  }, []);
 
   return (
     <main className="min-h-screen bg-background">
