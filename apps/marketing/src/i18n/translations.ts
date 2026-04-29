@@ -26,9 +26,9 @@ export const t = {
       en: "Professional Hostess & Catering Services",
     },
     sub: {
-      tr: "Fuarlar, kurumsal etkinlikler ve özel davetler için hostes, ikram ve stand desteği. Seelze merkezli iletişim: +49 172 7532501.",
-      de: "Hostess-, Bewirtungs- und Stand-Support für Messen, Firmenevents und private Anlässe. Kontaktstandort Seelze: +49 172 7532501.",
-      en: "Hostess, catering and stand support for trade fairs, corporate events and private occasions. Based in Seelze: +49 172 7532501.",
+      tr: "Fuarlar, kurumsal etkinlikler ve özel davetler için hostes, ikram ve stand desteği.",
+      de: "Hostess-, Bewirtungs- und Stand-Support für Messen, Firmenevents und private Anlässe in ganz Deutschland.",
+      en: "Hostess, catering and stand support for trade fairs, corporate events and private occasions across Germany.",
     },
     cta1: { tr: "Hizmetlerimizi Keşfedin", de: "Unsere Leistungen entdecken", en: "Discover Our Services" },
     cta2: { tr: "İletişime Geçin",          de: "Kontakt aufnehmen",           en: "Get in Touch" },

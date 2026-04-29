@@ -5,15 +5,15 @@ export const TR_SEO = {
   home: {
     title: "Ajans Köln | Almanya’da fuar hostesi ve etkinlik cateringi",
     description:
-      "Almanya genelinde fuar, kurumsal etkinlik ve özel organizasyonlar için Türkçe, Almanca ve İngilizce hostes ile catering koordinasyonu. Seelze merkezli, iletişim: +49 172 7532501.",
+      "Almanya genelinde fuar, kurumsal etkinlik ve özel organizasyonlar için Türkçe, Almanca ve İngilizce hostes ile catering koordinasyonu.",
     ogTitle: "Ajans Köln | Hostes ve catering, Almanya",
     ogDescription:
-      "Fuar ve kurumsal etkinlikler için Türkçe, Almanca ve İngilizce hostes ile ikram. Seelze. +49 172 7532501",
+      "Fuar ve kurumsal etkinlikler için Türkçe, Almanca ve İngilizce hostes, ikram ve stand desteği.",
   },
   impressum: {
     title: "Künye ve yasal bilgiler | Ajans Köln",
     description:
-      "Ajans Köln iletişim, adres (Seelze), sorumluluk ve bağlantı bilgileri. Türkiye ve Almanya’daki müşteriler için şeffaf künye sayfası.",
+      "Ajans Köln iletişim, künye, yasal sorumluluk ve bağlantı bilgileri. Türkiye ve Almanya’daki müşteriler için şeffaf bilgilendirme.",
   },
   datenschutz: {
     title: "Gizlilik bildirimi | Ajans Köln",
@@ -41,14 +41,6 @@ export function buildMainJsonLd(origin: string): JsonLdNode {
         url: origin,
         logo: `${origin}/logo-ajans-koeln.png`,
         email: "ajanskoeln@gmail.com",
-        telephone: "+49-172-7532501",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Dieselweg 1",
-          addressLocality: "Seelze",
-          postalCode: "30926",
-          addressCountry: "DE",
-        },
       },
       {
         "@type": "WebSite",
@@ -64,15 +56,7 @@ export function buildMainJsonLd(origin: string): JsonLdNode {
         name: "Ajans Köln",
         url: origin,
         image: `${origin}/logo-ajans-koeln.png`,
-        telephone: "+49-172-7532501",
         email: "ajanskoeln@gmail.com",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Dieselweg 1",
-          addressLocality: "Seelze",
-          postalCode: "30926",
-          addressCountry: "DE",
-        },
         areaServed: { "@type": "Country", name: "DE" },
         availableLanguage: ["Turkish", "German", "English"],
         knowsAbout: [
