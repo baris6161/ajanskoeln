@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Phone, Mail, Download, Building2 } from "lucide-react";
-import { withBasePath } from "@/lib/with-base-path";
 
 export default function NfcLandingPage() {
   return (
@@ -36,7 +35,7 @@ export default function NfcLandingPage() {
         </section>
 
         <Link
-          href={withBasePath("/api/nfc/vcf")}
+          href="/api/nfc/vcf"
           prefetch={false}
           className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#4a2a1f] px-5 py-3 text-base font-medium text-white transition hover:opacity-95 active:scale-[0.99]"
         >

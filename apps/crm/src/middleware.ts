@@ -7,7 +7,7 @@ import {
 } from "@/lib/previewSessionEdge";
 
 const CRM_BASE = "/crm";
-const CRM_CANONICAL_PREFIXES = ["/dashboard", "/customers", "/offers", "/settings", "/login", "/nfc"];
+const CRM_CANONICAL_PREFIXES = ["/dashboard", "/customers", "/offers", "/settings", "/login"];
 
 const MARKETING_PUBLIC = new Set([
   "/preview-gate.html",
@@ -28,6 +28,16 @@ function hasFileExtension(pathname: string): boolean {
   return /\.[a-z0-9]{2,8}$/i.test(pathname);
 }
 
+/** Öffentliche NFC-Landingpage und VCF (ohne /crm, ohne Marketing-Preview-Gate). */
+function isMarketingPublicPath(pathname: string): boolean {
+  return (
+    MARKETING_PUBLIC.has(pathname) ||
+    pathname === "/nfc" ||
+    pathname.startsWith("/nfc/") ||
+    pathname.startsWith("/api/nfc")
+  );
+}
+
 function isRootPreviewApi(pathname: string): boolean {
   return pathname === "/api/preview-session" || pathname === "/api/preview-logout";
 }
@@ -42,7 +52,7 @@ function isLinkPreviewBot(userAgent: string | null): boolean {
 
 function isCanonicalCrmPath(pathname: string): boolean {
   if (pathname.startsWith("/api/")) {
-    return !isRootPreviewApi(pathname);
+    return !isRootPreviewApi(pathname) && !pathname.startsWith("/api/nfc");
   }
   return CRM_CANONICAL_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
@@ -52,7 +62,7 @@ async function handleMarketing(request: NextRequest): Promise<NextResponse> {
   const ua = request.headers.get("user-agent");
 
   if (request.method === "GET" && isLinkPreviewBot(ua)) {
-    if (pathname.startsWith("/assets/") || MARKETING_PUBLIC.has(pathname) || hasFileExtension(pathname)) {
+    if (pathname.startsWith("/assets/") || isMarketingPublicPath(pathname) || hasFileExtension(pathname)) {
       return NextResponse.next();
     }
     return NextResponse.rewrite(new URL("/index.html", request.url));
@@ -67,7 +77,7 @@ async function handleMarketing(request: NextRequest): Promise<NextResponse> {
   if (sessionOk) {
     if (
       hasFileExtension(pathname) ||
-      MARKETING_PUBLIC.has(pathname) ||
+      isMarketingPublicPath(pathname) ||
       pathname.startsWith("/assets/")
     ) {
       return NextResponse.next();
@@ -82,7 +92,7 @@ async function handleMarketing(request: NextRequest): Promise<NextResponse> {
     });
   }
 
-  if (MARKETING_PUBLIC.has(pathname)) {
+  if (isMarketingPublicPath(pathname)) {
     return NextResponse.next();
   }
 
@@ -91,6 +101,16 @@ async function handleMarketing(request: NextRequest): Promise<NextResponse> {
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  // Früher unter /crm: dauerhaft auf öffentliche Root-URLs
+  if (pathname === `${CRM_BASE}/nfc` || pathname === `${CRM_BASE}/nfc/`) {
+    return NextResponse.redirect(new URL("/nfc", request.url), 301);
+  }
+  if (pathname.startsWith(`${CRM_BASE}/api/nfc`)) {
+    const u = request.nextUrl.clone();
+    u.pathname = pathname.slice(CRM_BASE.length);
+    return NextResponse.redirect(u, 301);
+  }
 
   // Keep CRM URLs canonical under /crm even though internal app routes live at root.
   if (!pathname.startsWith(CRM_BASE) && isCanonicalCrmPath(pathname)) {
@@ -112,8 +132,6 @@ export async function middleware(request: NextRequest) {
 
   const isPublicRoute =
     inner.startsWith("/login") ||
-    inner.startsWith("/nfc") ||
-    inner.startsWith("/api/nfc") ||
     inner.startsWith("/api/preview-session") ||
     inner.startsWith("/api/preview-logout");
 

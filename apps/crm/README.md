@@ -11,7 +11,7 @@ Die Plattform ist auf einen schnellen, strukturierten Sales- und Angebotsprozess
 - Angebotsverwaltung mit Statusfluss, Summenberechnung und Nachverfolgung
 - Sprachspezifischer Versand von Angeboten (TR/DE/EN) inklusive PDF-Anhang
 - Persistente, revisionssichere Angebotssprache für erneute PDF-Ansicht
-- NFC-Landingpage für Neukundenkontakt mit VCF-Download
+- Öffentliche NFC-Landingpage unter **`/nfc`** (nicht unter `/crm`) inkl. VCF unter **`/api/nfc/vcf`**
 - Rollen- und Session-basierte Zugriffskontrolle für interne Nutzung
 
 ## Funktionsumfang
@@ -78,6 +78,7 @@ Ajans Köln CRM ist als interne Business-Anwendung konzipiert, die eine konsiste
 Das Repository-Root ist ein **npm-Workspace**: `apps/marketing` (Vite-Website) und `apps/crm` (diese Next-App). Produktions-Build: zuerst Marketing bauen, `dist` nach `apps/crm/public` kopieren, dann `next build` — `npm run build` im Repo-Root.
 
 - **CRM-URL:** `basePath` ist `/crm` (z. B. `https://domain.de/crm/dashboard`).
+- **NFC-Kontakt:** `https://domain.de/nfc` und `https://domain.de/api/nfc/vcf` (öffentlich, ohne Preview-Cookie). Alte URLs `/crm/nfc` und `/crm/api/nfc/...` leiten mit 301 um.
 - **Marketing:** statische Dateien und SPA liegen unter `/` (aus `apps/crm/public` nach dem Kopierschritt).
 - **Vorschau-Login:** `POST /api/preview-session` und `GET /api/preview-logout` an der Domain-Root werden per Middleware intern auf die Next-Routen unter `/crm/api/...` umgeschrieben. Dafür `PREVIEW_SESSION_SECRET` (mindestens 16 Zeichen), optional `PREVIEW_ACCESS_USER` / `PREVIEW_ACCESS_PASSWORD`. Lokal optional `SKIP_PREVIEW_GATE=1`.
 
