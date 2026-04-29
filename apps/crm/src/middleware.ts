@@ -7,6 +7,7 @@ import {
 } from "@/lib/previewSessionEdge";
 
 const CRM_BASE = "/crm";
+const CRM_CANONICAL_PREFIXES = ["/dashboard", "/customers", "/offers", "/settings", "/login", "/nfc"];
 
 const MARKETING_PUBLIC = new Set([
   "/preview-gate.html",
@@ -28,6 +29,13 @@ function hasFileExtension(pathname: string): boolean {
 
 function isRootPreviewApi(pathname: string): boolean {
   return pathname === "/api/preview-session" || pathname === "/api/preview-logout";
+}
+
+function isCanonicalCrmPath(pathname: string): boolean {
+  if (pathname.startsWith("/api/")) {
+    return !isRootPreviewApi(pathname);
+  }
+  return CRM_CANONICAL_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
 
 async function handleMarketing(request: NextRequest): Promise<NextResponse> {
@@ -67,10 +75,11 @@ async function handleMarketing(request: NextRequest): Promise<NextResponse> {
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  if (isRootPreviewApi(pathname)) {
+  // Keep CRM URLs canonical under /crm even though internal app routes live at root.
+  if (!pathname.startsWith(CRM_BASE) && isCanonicalCrmPath(pathname)) {
     const url = request.nextUrl.clone();
     url.pathname = `${CRM_BASE}${pathname}`;
-    return NextResponse.rewrite(url);
+    return NextResponse.redirect(url);
   }
 
   if (!pathname.startsWith(CRM_BASE)) {
@@ -79,10 +88,6 @@ export async function middleware(request: NextRequest) {
 
   const inner = pathname.slice(CRM_BASE.length) || "/";
 
-  if (inner.startsWith("/_next") || inner === "/favicon.ico") {
-    return NextResponse.next({ request });
-  }
-
   const isPublicRoute =
     inner.startsWith("/login") ||
     inner.startsWith("/nfc") ||
@@ -90,37 +95,34 @@ export async function middleware(request: NextRequest) {
     inner.startsWith("/api/preview-session") ||
     inner.startsWith("/api/preview-logout");
 
-  if (isPublicRoute) {
-    return NextResponse.next({ request });
-  }
-
   const response = NextResponse.next({ request });
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
-    {
-      cookies: {
-        getAll: () => request.cookies.getAll(),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options),
-          );
+  if (!isPublicRoute) {
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
+      {
+        cookies: {
+          getAll: () => request.cookies.getAll(),
+          setAll: (cookiesToSet) => {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              response.cookies.set(name, value, options),
+            );
+          },
         },
       },
-    },
-  );
+    );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  const isAuthRoute = inner.startsWith("/login");
-  if (!user && !isAuthRoute) {
-    return NextResponse.redirect(new URL(`${CRM_BASE}/login`, request.url));
-  }
-  if (user && isAuthRoute) {
-    return NextResponse.redirect(new URL(`${CRM_BASE}/dashboard`, request.url));
+    const isAuthRoute = inner.startsWith("/login");
+    if (!user && !isAuthRoute) {
+      return NextResponse.redirect(new URL(`${CRM_BASE}/login`, request.url));
+    }
+    if (user && isAuthRoute) {
+      return NextResponse.redirect(new URL(`${CRM_BASE}/dashboard`, request.url));
+    }
   }
 
   response.headers.set("X-Content-Type-Options", "nosniff");
@@ -129,7 +131,16 @@ export async function middleware(request: NextRequest) {
   response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   response.headers.set("Cross-Origin-Opener-Policy", "same-origin");
 
-  return response;
+  const rewriteUrl = request.nextUrl.clone();
+  rewriteUrl.pathname = inner;
+  const rewritten = NextResponse.rewrite(rewriteUrl);
+  rewritten.headers.set("X-Content-Type-Options", "nosniff");
+  rewritten.headers.set("X-Frame-Options", "DENY");
+  rewritten.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  rewritten.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  rewritten.headers.set("Cross-Origin-Opener-Policy", "same-origin");
+  response.cookies.getAll().forEach((cookie) => rewritten.cookies.set(cookie));
+  return rewritten;
 }
 
 export const config = {
