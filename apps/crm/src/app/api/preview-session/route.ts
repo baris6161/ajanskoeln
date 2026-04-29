@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { mintPreviewSession, PREVIEW_COOKIE_NAME } from "@/lib/previewSessionEdge";
 
-export const runtime = "edge";
-
 function getCreds(): { user: string; pass: string } {
   const user = process.env.PREVIEW_ACCESS_USER ?? "baris";
   const pass = process.env.PREVIEW_ACCESS_PASSWORD ?? "Gewerbe2022";
@@ -18,7 +16,7 @@ function urlIsHttps(url: string): boolean {
 }
 
 export async function POST(request: NextRequest) {
-  const secret = process.env.PREVIEW_SESSION_SECRET ?? "";
+  const secret = (process.env.PREVIEW_SESSION_SECRET ?? "").trim();
   if (secret.length < 16) {
     return NextResponse.json({ error: "server_misconfigured" }, { status: 503 });
   }

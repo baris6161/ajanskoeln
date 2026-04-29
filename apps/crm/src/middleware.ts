@@ -41,7 +41,7 @@ function isCanonicalCrmPath(pathname: string): boolean {
 async function handleMarketing(request: NextRequest): Promise<NextResponse> {
   const pathname = request.nextUrl.pathname;
 
-  const secret = process.env.PREVIEW_SESSION_SECRET ?? "";
+  const secret = (process.env.PREVIEW_SESSION_SECRET ?? "").trim();
   const cookie = readCookie(request.headers.get("cookie"), PREVIEW_COOKIE_NAME);
   const skipGate = process.env.SKIP_PREVIEW_GATE === "1";
   const sessionOk =

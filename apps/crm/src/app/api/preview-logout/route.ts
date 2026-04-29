@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PREVIEW_COOKIE_NAME } from "@/lib/previewSessionEdge";
 
-export const runtime = "edge";
-
 function urlIsHttps(url: string): boolean {
   try {
     return new URL(url).protocol === "https:";
