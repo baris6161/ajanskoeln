@@ -82,6 +82,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // Nicht durch Marketing-Gate: sonst Rewrite auf preview-gate.html → bei POST auf /api/preview-session 405.
+  if (!pathname.startsWith(CRM_BASE) && isRootPreviewApi(pathname)) {
+    return NextResponse.next();
+  }
+
   if (!pathname.startsWith(CRM_BASE)) {
     return handleMarketing(request);
   }
