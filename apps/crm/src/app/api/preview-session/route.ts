@@ -16,9 +16,19 @@ function urlIsHttps(url: string): boolean {
 }
 
 export async function POST(request: NextRequest) {
-  const secret = (process.env.PREVIEW_SESSION_SECRET ?? "").trim();
+  const rawSecret = process.env.PREVIEW_SESSION_SECRET;
+  const secret = (rawSecret ?? "").trim();
   if (secret.length < 16) {
-    return NextResponse.json({ error: "server_misconfigured" }, { status: 503 });
+    const debug = {
+      error: "server_misconfigured" as const,
+      reason: "PREVIEW_SESSION_SECRET missing, too short after trim, or only whitespace",
+      secretLengthAfterTrim: secret.length,
+      secretEnvDefined: rawSecret !== undefined,
+      vercel: process.env.VERCEL === "1",
+      node: typeof process !== "undefined" ? process.version : "unknown",
+    };
+    console.error("[preview-session]", debug);
+    return NextResponse.json(debug, { status: 503 });
   }
 
   let body: { username?: string; password?: string };
