@@ -511,6 +511,7 @@
           try {
             var res = await fetch("/api/preview-session", {
               method: "POST",
+              credentials: "same-origin",
               headers: { "content-type": "application/json", accept: "application/json" },
               body: JSON.stringify({
                 username: document.getElementById("u").value,
