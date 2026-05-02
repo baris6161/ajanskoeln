@@ -34,7 +34,8 @@ function isMarketingPublicPath(pathname: string): boolean {
     MARKETING_PUBLIC.has(pathname) ||
     pathname === "/nfc" ||
     pathname.startsWith("/nfc/") ||
-    pathname.startsWith("/api/nfc")
+    pathname.startsWith("/api/nfc") ||
+    pathname.startsWith("/ref/")
   );
 }
 

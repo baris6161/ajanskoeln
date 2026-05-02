@@ -145,9 +145,9 @@ export const t = {
       en: "Where and how we work",
     },
     intro: {
-      tr: "Müşteri isimlerini veya şirket logolarını web sitesinde paylaşmıyoruz. Talep ettiğinizde süreç, kapsam ve uygunluk için doğrudan konuşabiliriz.",
-      de: "Wir veröffentlichen keine Kundennamen oder Firmenlogos auf der Website. Auf Anfrage sprechen wir gern direkt über Ablauf, Umfang und Verfügbarkeit.",
-      en: "We do not publish client names or company logos on the website. On request we can discuss process, scope and availability directly.",
+      tr: "Bazı iş ortaklarımızın logoları aşağıdadır. Diğer referanslar veya detay için iletişime geçebilirsiniz.",
+      de: "Unten finden Sie Logos ausgewählter Partner. Für weitere Referenzen oder Details kontaktieren Sie uns.",
+      en: "Below are logos of selected partners. Contact us for further references or details.",
     },
     bullets: [
       {
@@ -164,6 +164,17 @@ export const t = {
         tr: "Kurumsal davet ve özel günlerde ikram ve servis koordinasyonu",
         de: "Bewirtung und Service-Koordination bei Firmenfeiern und privaten Anlässen",
         en: "Catering and service coordination for corporate and private occasions",
+      },
+    ],
+    logoAlts: [
+      { tr: "OKT Trailer logosu", de: "OKT Trailer Logo", en: "OKT Trailer logo" },
+      { tr: "İş ortağı logosu", de: "Partnerlogo", en: "Partner logo" },
+      { tr: "Rentoya logosu", de: "Rentoya Logo", en: "Rentoya logo" },
+      { tr: "Elit logosu", de: "Elit Logo", en: "Elit logo" },
+      {
+        tr: "The Land of Legends logosu",
+        de: "The Land of Legends Logo",
+        en: "The Land of Legends logo",
       },
     ],
   },

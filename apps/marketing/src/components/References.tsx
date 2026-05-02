@@ -1,6 +1,14 @@
 import { useLang } from "@/i18n/LanguageContext";
 import { t, tr } from "@/i18n/translations";
 
+const REF_LOGOS = [
+  "/ref/okt-trailer.png",
+  "/ref/partner-symbol.png",
+  "/ref/rentoya.png",
+  "/ref/elit.png",
+  "/ref/land-of-legends.png",
+] as const;
+
 export default function References() {
   const { lang } = useLang();
   return (
@@ -16,7 +24,33 @@ export default function References() {
           </p>
         </div>
 
-        <ul className="reveal mx-auto mt-12 max-w-2xl list-disc space-y-3 pl-5 text-left text-foreground/85 text-[15px] leading-relaxed" style={{ transitionDelay: "220ms" }}>
+        <div
+          className="reveal mx-auto mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-5 md:gap-10 items-center justify-items-center"
+          style={{ transitionDelay: "200ms" }}
+        >
+          {REF_LOGOS.map((src, i) => {
+            const altNode = t.refs.logoAlts[i];
+            if (!altNode) return null;
+            return (
+              <div
+                key={src}
+                className="flex h-[72px] w-full max-w-[180px] items-center justify-center px-3 py-2 md:h-[88px]"
+              >
+                <img
+                  src={src}
+                  alt={tr(altNode, lang)}
+                  width={180}
+                  height={88}
+                  loading="lazy"
+                  decoding="async"
+                  className="max-h-full max-w-full object-contain opacity-90 grayscale-[35%] transition duration-300 hover:opacity-100 hover:grayscale-0"
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <ul className="reveal mx-auto mt-14 max-w-2xl list-disc space-y-3 pl-5 text-left text-foreground/85 text-[15px] leading-relaxed" style={{ transitionDelay: "260ms" }}>
           {t.refs.bullets.map((b) => (
             <li key={tr(b, lang)}>{tr(b, lang)}</li>
           ))}
