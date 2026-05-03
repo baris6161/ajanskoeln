@@ -43,7 +43,7 @@ export default function References() {
                   height={88}
                   loading="lazy"
                   decoding="async"
-                  className="max-h-full max-w-full object-contain opacity-90 grayscale-[35%] transition duration-300 hover:opacity-100 hover:grayscale-0"
+                  className="max-h-full max-w-full object-contain mix-blend-multiply opacity-[0.96] transition-opacity duration-300 hover:opacity-100"
                 />
               </div>
             );
