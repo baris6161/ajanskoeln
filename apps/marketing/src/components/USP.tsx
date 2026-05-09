@@ -1,8 +1,8 @@
-import { Globe, MapPin, Zap, Award, User, Star, Calendar } from "lucide-react";
+import { Globe, MapPin, Zap, Award, User, Star, Calendar, Briefcase } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { t, tr } from "@/i18n/translations";
 
-const icons = [Globe, MapPin, Zap, Award, User, Star, Calendar];
+const icons = [Globe, MapPin, Zap, Award, User, Star, Calendar, Briefcase];
 
 export default function USP() {
   const { lang } = useLang();
@@ -27,7 +27,7 @@ export default function USP() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {t.usp.items.map((item, i) => {
             const Icon = icons[i];
             return (

@@ -243,22 +243,22 @@ export const t = {
     label: { tr: "Neden Biz?", de: "Warum wir?", en: "Why us?" },
     title: { tr: "Neden Ajans Köln?", de: "Warum Ajans Köln?", en: "Why Ajans Köln?" },
     sub: {
-      tr: "Etkinliğiniz için doğru ekibi seçmek kritik. İşte bizi farklı kılan özellikler.",
-      de: "Die Wahl des richtigen Teams für Ihre Veranstaltung ist entscheidend. Das macht uns besonders.",
-      en: "Choosing the right team for your event is critical. Here is what sets us apart.",
+      tr: "Etkinliğiniz için doğru ekibi seçmek kritik. Bizi tercih ettiren özellikler bunlar.",
+      de: "Die Wahl des richtigen Teams für Ihre Veranstaltung ist entscheidend. Das sind unsere Stärken.",
+      en: "Choosing the right team for your event matters. These are the qualities that define our work.",
     },
     items: [
       {
         title: { tr: "Çok Dilli Ekip", de: "Mehrsprachiges Team", en: "Multilingual Team" },
-        desc: { tr: "Türkçe, Almanca ve İngilizce — dil bariyeri olmadan profesyonel hizmet.", de: "Türkisch, Deutsch und Englisch — professioneller Service ohne Sprachbarriere.", en: "Turkish, German and English — professional service without language barriers." },
+        desc: { tr: "Türkçe, Almanca ve İngilizce. Dil fark etmeksizin profesyonel hizmet.", de: "Türkisch, Deutsch und Englisch. Professioneller Service ohne Sprachbarriere.", en: "Turkish, German and English. Professional service with no language barriers." },
       },
       {
         title: { tr: "Almanya Geneli", de: "Deutschlandweit", en: "Nationwide" },
-        desc: { tr: "Köln'den Hannover'e, Frankfurt'tan Berlin'e — tüm Almanya'da görev alıyoruz.", de: "Von Köln bis Hannover, von Frankfurt bis Berlin — wir sind in ganz Deutschland im Einsatz.", en: "From Cologne to Hannover, Frankfurt to Berlin — we operate across all of Germany." },
+        desc: { tr: "Köln'den Hannover'e, Frankfurt'tan Berlin'e kadar tüm Almanya'da görev alıyoruz.", de: "Von Köln bis Hannover, von Frankfurt bis Berlin: wir sind in ganz Deutschland im Einsatz.", en: "From Cologne to Hannover, Frankfurt to Berlin: we operate across all of Germany." },
       },
       {
         title: { tr: "Kısa Sürede Hazır", de: "Kurzfristig verfügbar", en: "Available at Short Notice" },
-        desc: { tr: "Acil durumlarda da çözüm üretiyoruz. Kısa süre içinde görev alabilecek ekibimiz hazır.", de: "Auch in dringenden Fällen finden wir eine Lösung. Unser Team ist kurzfristig einsatzbereit.", en: "We deliver solutions even in urgent situations. Our team is ready to deploy on short notice." },
+        desc: { tr: "Acil durumlarda da çözüm üretiyoruz. Kısa süre içinde görev alabilecek ekibimiz hazır.", de: "Auch in dringenden Fällen finden wir eine Lösung. Unser Team ist kurzfristig einsatzbereit.", en: "We find solutions even in urgent situations. Our team is ready to deploy on short notice." },
       },
       {
         title: { tr: "Messe Deneyimi", de: "Messeerfahrung", en: "Trade Fair Expertise" },
@@ -266,7 +266,7 @@ export const t = {
       },
       {
         title: { tr: "Sabit İletişim Kişisi", de: "Fester Ansprechpartner", en: "Dedicated Contact Person" },
-        desc: { tr: "Her etkinlik için tek bir iletişim noktası — başından sonuna kadar yanınızda.", de: "Ein fester Ansprechpartner für jede Veranstaltung — von Anfang bis Ende an Ihrer Seite.", en: "One dedicated contact for each event — by your side from start to finish." },
+        desc: { tr: "Her etkinlik için tek bir iletişim noktası. Planlama ile kapanış arasındaki koordinasyonu biz yönetiriz.", de: "Ein fester Ansprechpartner für jede Veranstaltung. Wir koordinieren alles von der Planung bis zum Abschluss.", en: "One dedicated contact for each event. We manage all coordination from planning through to close." },
       },
       {
         title: { tr: "Profesyonel Görünüm", de: "Professionelles Auftreten", en: "Professional Appearance" },
@@ -274,7 +274,11 @@ export const t = {
       },
       {
         title: { tr: "Esnek Planlama", de: "Flexible Einsatzplanung", en: "Flexible Scheduling" },
-        desc: { tr: "Küçük etkinlikten büyük fuara — ekip büyüklüğü ve program ihtiyacınıza göre şekillenir.", de: "Von kleinen Events bis zu großen Messen — Teamgröße und Zeitplan passen sich Ihren Bedürfnissen an.", en: "From small events to large trade fairs — team size and schedule adapt to your needs." },
+        desc: { tr: "Küçük etkinlikten büyük fuara kadar ekip büyüklüğü ve program ihtiyacınıza göre şekillenir.", de: "Von kleinen Events bis zu großen Messen: Teamgröße und Zeitplan passen sich Ihren Anforderungen an.", en: "From small events to large trade fairs: team size and schedule adapt to your requirements." },
+      },
+      {
+        title: { tr: "Sektör Bilgisi", de: "Branchen-Know-how", en: "Industry Know-how" },
+        desc: { tr: "Fuar ve etkinlik sektörünü içeriden tanıyoruz. Bu birikim, her detayda fark yaratır.", de: "Wir kennen die Messe- und Eventbranche von innen. Diese Erfahrung zeigt sich in jedem Detail.", en: "We know the trade fair and event industry from the inside. This experience shows in every detail." },
       },
     ],
   },
@@ -282,13 +286,13 @@ export const t = {
     label: { tr: "Nasıl Çalışıyoruz?", de: "Wie wir arbeiten", en: "How we work" },
     title: { tr: "Süreç Nasıl İşliyor?", de: "Wie läuft der Ablauf?", en: "What is the process?" },
     sub: {
-      tr: "Başından sonuna kadar şeffaf ve planlı bir süreç. Siz rahat edin, biz halledelim.",
-      de: "Ein transparenter, geplanter Ablauf von Anfang bis Ende. Lehnen Sie sich zurück, wir übernehmen.",
-      en: "A transparent, planned process from start to finish. Sit back and let us handle it.",
+      tr: "Başından sonuna kadar şeffaf ve planlı bir süreç. Her adım önceden netleştirilir.",
+      de: "Ein transparenter und strukturierter Ablauf von der Anfrage bis zum Einsatztag.",
+      en: "A transparent, structured process from the first contact to the last day on site.",
     },
     steps: [
       { title: { tr: "Talep Gönderin", de: "Anfrage senden", en: "Send Request" }, desc: { tr: "Telefon, WhatsApp veya form aracılığıyla bize ulaşın. Etkinlik detaylarınızı paylaşın.", de: "Kontaktieren Sie uns per Telefon, WhatsApp oder Formular. Teilen Sie Ihre Veranstaltungsdetails mit.", en: "Reach us by phone, WhatsApp or form. Share your event details with us." } },
-      { title: { tr: "Brifing & Planlama", de: "Briefing & Planung", en: "Briefing & Planning" }, desc: { tr: "Rol, kıyafet ve zaman çizelgesini birlikte netleştiriyoruz. Hiçbir detay gözden kaçmaz.", de: "Gemeinsam klären wir Rolle, Dresscode und Ablauf. Kein Detail bleibt offen.", en: "Together we clarify role, dress code and schedule. No detail is left open." } },
+      { title: { tr: "Brifing & Planlama", de: "Briefing & Planung", en: "Briefing & Planning" }, desc: { tr: "Rol, kıyafet ve zaman çizelgesini birlikte netleştiriyoruz. Her detay önceden konuşulur.", de: "Gemeinsam klären wir Rolle, Dresscode und Ablauf bis ins Detail.", en: "Together we clarify role, dress code and schedule in full before the assignment." } },
       { title: { tr: "Personel Seçimi", de: "Personalauswahl", en: "Staff Selection" }, desc: { tr: "Etkinliğinize en uygun ekibi belirliyor, dil ve deneyim gereksinimlerinizi karşılıyoruz.", de: "Wir wählen das am besten geeignete Team für Ihre Veranstaltung und erfüllen Ihre Sprach- und Erfahrungsanforderungen.", en: "We select the most suitable team for your event, meeting your language and experience requirements." } },
       { title: { tr: "Hazırlık", de: "Vorbereitung", en: "Preparation" }, desc: { tr: "Ekibimiz etkinlik öncesinde detaylı brifing alır. Pünktlichkeit ve professional görünüm garantili.", de: "Unser Team wird vor der Veranstaltung detailliert gebrieft. Pünktlichkeit und professionelles Erscheinungsbild garantiert.", en: "Our team is thoroughly briefed before the event. Punctuality and professional appearance guaranteed." } },
       { title: { tr: "Etkinlik & Destek", de: "Einsatz & Betreuung", en: "On-site & Support" }, desc: { tr: "Etkinlik süresince ekibimiz yerinde. Herhangi bir sorun için her zaman ulaşılabilir bir koordinatör.", de: "Unser Team ist während der gesamten Veranstaltung vor Ort. Ein erreichbarer Koordinator für alle Fragen.", en: "Our team is on-site throughout the event. A reachable coordinator for any questions." } },
@@ -299,7 +303,7 @@ export const t = {
     title: { tr: "Müşterilerimiz Ne Diyor?", de: "Was unsere Kunden sagen", en: "What our clients say" },
     items: [
       {
-        quote: { tr: "Güvenilir, profesyonel ve esnek — fuarımız için tam ihtiyacımız olan buydu.", de: "Zuverlässig, professionell und flexibel — genau das, was wir für unsere Messe gebraucht haben.", en: "Reliable, professional and flexible — exactly what we needed for our trade fair." },
+        quote: { tr: "Güvenilir, profesyonel ve esnek. Fuar sürecinde tam olarak aradığımızı bulduk.", de: "Zuverlässig, professionell und flexibel. Das Team hat unsere Erwartungen bei der Messe vollständig erfüllt.", en: "Reliable, professional and flexible. The team met every expectation at our trade fair." },
         author: { tr: "Event Yöneticisi", de: "Event Managerin", en: "Event Manager" },
         company: { tr: "Hannover Messe", de: "Hannover Messe", en: "Hannover Messe" },
       },
