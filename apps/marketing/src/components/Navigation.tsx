@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, ArrowRight } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { LANGS, t, tr } from "@/i18n/translations";
 import BrandLogo from "@/components/BrandLogo";
 
-const links = [
+const allLinks = [
   { href: "#hakkimizda", key: "about" as const },
   { href: "#hizmetler",  key: "services" as const },
   { href: "#referanslar", key: "refs" as const },
   { href: "#galeri",     key: "gallery" as const },
   { href: "#iletisim",   key: "contact" as const },
 ];
+
+// Desktop nav shows only 3 links; contact becomes the CTA button
+const desktopLinks = allLinks.slice(0, 3);
 
 export default function Navigation() {
   const { lang, setLang } = useLang();
@@ -73,9 +76,9 @@ export default function Navigation() {
           </Link>
         )}
 
-        {/* Desktop links */}
+        {/* Desktop links — 3 main sections */}
         <ul className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
+          {desktopLinks.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
@@ -88,8 +91,9 @@ export default function Navigation() {
           ))}
         </ul>
 
-        {/* Lang + mobile button */}
+        {/* Right: lang + CTA + mobile burger */}
         <div className="flex items-center gap-3">
+          {/* Language switcher */}
           <div className={`hidden sm:flex items-center gap-1 rounded-full border px-1 py-1 transition-colors ${lookScrolled ? "border-border bg-background" : "border-background/30 bg-background/10 backdrop-blur-sm"}`}>
             <Globe className={`ml-2 h-3.5 w-3.5 ${lookScrolled ? "text-muted-foreground" : "text-background/80"}`} />
             {LANGS.map((l) => (
@@ -108,6 +112,21 @@ export default function Navigation() {
             ))}
           </div>
 
+          {/* Contact CTA — desktop only */}
+          <a
+            href="#iletisim"
+            onClick={(e) => { e.preventDefault(); handleNav("#iletisim"); }}
+            className={`hidden md:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium tracking-wide transition-all duration-300 min-h-[44px] group ${
+              lookScrolled
+                ? "bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-[var(--shadow-elegant)] hover:-translate-y-0.5"
+                : "border-2 border-background/80 bg-transparent text-background hover:bg-background hover:text-primary"
+            }`}
+          >
+            {tr(t.nav.contact, lang)}
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          </a>
+
+          {/* Mobile burger */}
           <button
             onClick={() => setOpen(true)}
             className={`md:hidden flex h-11 w-11 items-center justify-center rounded-full transition-colors ${lookScrolled ? "text-primary" : "text-background"}`}
@@ -119,7 +138,7 @@ export default function Navigation() {
       </nav>
     </header>
 
-      {/* Außerhalb des Headers: vermeidet backdrop-blur-Bugs (transparentes Panel nach Scroll) */}
+      {/* Mobile drawer — all links */}
       <div
         className={`fixed inset-0 z-[100] md:hidden transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={() => setOpen(false)}
@@ -137,12 +156,12 @@ export default function Navigation() {
             </button>
           </div>
           <ul className="flex flex-col bg-background px-6 py-6">
-            {links.map((l) => (
+            {allLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
                   onClick={(e) => { e.preventDefault(); handleNav(l.href); }}
-                  className="block py-4 font-display text-2xl text-primary border-b border-border/60 hover:text-accent transition-colors"
+                  className={`block py-4 font-display text-2xl text-primary border-b border-border/60 hover:text-accent transition-colors ${l.key === "contact" ? "text-accent" : ""}`}
                 >
                   {tr(t.nav[l.key], lang)}
                 </a>

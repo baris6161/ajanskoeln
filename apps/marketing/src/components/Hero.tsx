@@ -2,22 +2,11 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 import { t, tr } from "@/i18n/translations";
-import hero1 from "@/assets/hero-1.jpg";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
-import hero4 from "@/assets/hero-4.jpg";
-
-const slides = [hero1, hero2, hero3, hero4];
+import heroImg from "@/assets/hero-1.jpg";
 
 export default function Hero() {
   const { lang } = useLang();
-  const [active, setActive] = useState(0);
   const [parallax, setParallax] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setActive((i) => (i + 1) % slides.length), 5000);
-    return () => clearInterval(id);
-  }, []);
 
   useEffect(() => {
     const onScroll = () => setParallax(Math.min(window.scrollY * 0.3, 200));
@@ -29,21 +18,17 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-dark-section">
-      {/* Slideshow */}
+      {/* Single hero image with parallax */}
       <div className="absolute inset-0" style={{ transform: `translate3d(0, ${parallax}px, 0) scale(1.08)` }}>
-        {slides.map((src, i) => (
-          <img
-            key={src}
-            src={src}
-            alt={tr(t.hero.slideAlts[i]!, lang)}
-            width={1920}
-            height={1280}
-            loading={i === 0 ? "eager" : "lazy"}
-            fetchPriority={i === 0 ? "high" : "low"}
-            style={{ transitionDuration: "1500ms" }}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity ease-out ${active === i ? "opacity-100" : "opacity-0"}`}
-          />
-        ))}
+        <img
+          src={heroImg}
+          alt={tr(t.hero.slideAlts[0]!, lang)}
+          width={1920}
+          height={1280}
+          loading="eager"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
       </div>
 
       {/* Overlays */}
@@ -81,18 +66,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Slide indicators */}
-      <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-10 bg-accent" : "w-5 bg-background/40 hover:bg-background/70"}`}
-            aria-label={`${tr(t.hero.slideDotAria, lang)} ${i + 1}`}
-          />
-        ))}
       </div>
     </section>
   );

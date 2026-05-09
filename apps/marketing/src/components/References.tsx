@@ -12,7 +12,7 @@ const REF_LOGOS = [
 export default function References() {
   const { lang } = useLang();
   return (
-    <section id="referanslar" className="bg-background py-24 md:py-32">
+    <section id="referanslar" className="bg-muted py-24 md:py-32">
       <div className="container-tight">
         <div className="mx-auto max-w-2xl text-center">
           <p className="reveal text-xs font-semibold uppercase tracking-[0.25em] text-accent">{tr(t.refs.label, lang)}</p>
