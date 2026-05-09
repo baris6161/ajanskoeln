@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <footer className="bg-dark-section text-[hsl(25_26%_87%)]">
       <div className="container-tight py-14">
-        <div className="grid gap-10 md:grid-cols-3 items-start">
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>
             <div className="flex items-center">
               <BrandLogo variant="footer" />
@@ -25,29 +25,23 @@ export default function Footer() {
             <p className="mt-3 text-sm opacity-70">{tr(t.footer.tagline, lang)}</p>
           </div>
           <nav className="flex flex-col gap-6">
-            <div className="flex flex-wrap gap-x-6 gap-y-3">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 whitespace-nowrap">
               {links.map((l) => (
                 <Link key={l.to} to={l.to} className="text-sm opacity-80 hover:text-accent transition-colors">
                   {tr(t.nav[l.key], lang)}
                 </Link>
               ))}
             </div>
-            <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-background/10 pt-4 text-xs uppercase tracking-wider opacity-80">
+            <div className="flex items-center gap-x-5 border-t border-background/10 pt-4 text-xs tracking-wide opacity-80">
               <Link to="/impressum" className="hover:text-accent transition-colors">
                 {tr(t.footer.imprint, lang)}
               </Link>
-              <span className="opacity-40" aria-hidden>
-                |
-              </span>
+              <span className="opacity-40" aria-hidden>|</span>
               <Link to="/datenschutz" className="hover:text-accent transition-colors">
                 {tr(t.footer.privacy, lang)}
               </Link>
             </div>
           </nav>
-          <div className="md:text-right text-sm opacity-70 space-y-1">
-            <p><a href="tel:+491727532501" className="hover:text-accent">+49 172 7532501</a></p>
-            <p><a href="mailto:ajanskoeln@gmail.com" className="hover:text-accent">ajanskoeln@gmail.com</a></p>
-          </div>
         </div>
         <div className="mt-10 border-t border-background/10 pt-6 text-center text-xs opacity-60">
           © {year} Ajans Köln. {tr(t.footer.rights, lang)}
