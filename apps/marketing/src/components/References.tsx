@@ -2,11 +2,11 @@ import { useLang } from "@/i18n/LanguageContext";
 import { t, tr } from "@/i18n/translations";
 
 const REF_LOGOS = [
-  "/ref/okt-trailer.png",
-  "/ref/partner-symbol.png",
-  "/ref/rentoya.png",
-  "/ref/elit.png",
-  "/ref/land-of-legends.png",
+  { src: "/ref/okt-trailer.png", wide: false },
+  { src: "/ref/partner-symbol.png", wide: false },
+  { src: "/ref/rentoya.png", wide: false },
+  { src: "/ref/elit.png", wide: false },
+  { src: "/ref/land-of-legends.png", wide: true },
 ] as const;
 
 export default function References() {
@@ -28,33 +28,25 @@ export default function References() {
           className="reveal mx-auto mt-14 grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-5 md:gap-10 items-center justify-items-center"
           style={{ transitionDelay: "200ms" }}
         >
-          {REF_LOGOS.map((src, i) => {
+          {REF_LOGOS.map((logo, i) => {
             const altNode = t.refs.logoAlts[i];
             if (!altNode) return null;
             return (
               <div
-                key={src}
-                className="flex h-[72px] w-full max-w-[180px] items-center justify-center px-3 py-2 md:h-[88px]"
+                key={logo.src}
+                className={`flex h-[72px] w-full items-center justify-center px-2 py-2 md:h-[88px] ${logo.wide ? "max-w-[260px]" : "max-w-[140px]"}`}
               >
                 <img
-                  src={src}
+                  src={logo.src}
                   alt={tr(altNode, lang)}
-                  width={180}
-                  height={88}
                   loading="lazy"
                   decoding="async"
-                  className="max-h-full max-w-full object-contain mix-blend-multiply opacity-[0.96] transition-opacity duration-300 hover:opacity-100"
+                  className="max-h-full max-w-full object-contain mix-blend-multiply opacity-[0.85] transition-opacity duration-300 hover:opacity-100"
                 />
               </div>
             );
           })}
         </div>
-
-        <ul className="reveal mx-auto mt-14 max-w-2xl list-disc space-y-3 pl-5 text-left text-foreground/85 text-[15px] leading-relaxed" style={{ transitionDelay: "260ms" }}>
-          {t.refs.bullets.map((b) => (
-            <li key={tr(b, lang)}>{tr(b, lang)}</li>
-          ))}
-        </ul>
       </div>
     </section>
   );

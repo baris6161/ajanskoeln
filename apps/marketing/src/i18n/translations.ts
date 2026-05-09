@@ -94,12 +94,8 @@ export const t = {
         label: { tr: "Görev alanı: Almanya", de: "Einsatzgebiet: Deutschland", en: "Service area: Germany" },
       },
       {
-        value: { tr: "·", de: "·", en: "·" },
-        label: {
-          tr: "Hostes ve ikram koordinasyonu",
-          de: "Hostess- und Catering-Koordination",
-          en: "Hostess and catering coordination",
-        },
+        value: { tr: "10+", de: "10+", en: "10+" },
+        label: { tr: "Yıllık deneyim", de: "Jahre Erfahrung", en: "Years of experience" },
       },
     ],
   },
@@ -149,23 +145,6 @@ export const t = {
       de: "Unten finden Sie Logos ausgewählter Partner. Für weitere Referenzen oder Details kontaktieren Sie uns.",
       en: "Below are logos of selected partners. Contact us for further references or details.",
     },
-    bullets: [
-      {
-        tr: "Ulusal ve uluslararası fuar ortamlarında hostes ve misafir karşılama",
-        de: "Hostess und Gästeempfang auf nationalen und internationalen Messen",
-        en: "Hostess and guest reception at national and international trade fairs",
-      },
-      {
-        tr: "Hannover Messe gibi büyük fuar alanlarında saha deneyimi",
-        de: "Erfahrung auf großen Messegeländen wie der Hannover Messe",
-        en: "On-site experience at large fairgrounds such as Hannover Messe",
-      },
-      {
-        tr: "Kurumsal davet ve özel günlerde ikram ve servis koordinasyonu",
-        de: "Bewirtung und Service-Koordination bei Firmenfeiern und privaten Anlässen",
-        en: "Catering and service coordination for corporate and private occasions",
-      },
-    ],
     logoAlts: [
       { tr: "OKT Trailer logosu", de: "OKT Trailer Logo", en: "OKT Trailer logo" },
       { tr: "İş ortağı logosu", de: "Partnerlogo", en: "Partner logo" },
